@@ -7,7 +7,7 @@ about:
        - icon: envelope
          href: z5an@ucsd.edu
        - icon: linkedin
-         href: https://www.google.com/
+         href: https://www.linkedin.com/in/ethan-an-04014828b/
 
 ---
 
