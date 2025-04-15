@@ -1,0 +1,7 @@
+---
+title: "Resume"
+---
+
+_Last update 2024_06_01_
+
+{{< pdf files/Resume.pdf width=100% height=800 >}}

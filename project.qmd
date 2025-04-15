@@ -1,0 +1,8 @@
+---
+title: "Ethan's project"
+listing:
+  contents: project
+  type: grid
+  sort: "data desc"
+  categories: false
+---
