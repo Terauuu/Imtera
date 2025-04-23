@@ -5,7 +5,7 @@ about:
     template: jolla
     links:
        - icon: envelope
-         href: z5an@ucsd.edu
+         href: mailto:z5an@ucsd.edu
        - icon: linkedin
          href: https://www.linkedin.com/in/ethan-an-04014828b/
 

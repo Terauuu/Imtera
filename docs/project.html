@@ -78,9 +78,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-title','listing-author','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-title','listing-author','listing-date','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-title","listing-author","listing-image","listing-description"],
+      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -202,13 +202,61 @@ window.Quarto = {
 
 <div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
 <div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-listing-file-modified-sort="1743879245000" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<div class="g-col-1" data-index="0" data-listing-date-sort="1745391600000" data-listing-file-modified-sort="1745301950814" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="24" data-listing-word-count-sort="4723">
+<a href="./project/hw1/hw1_questions.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top"><img src="project/hw1/image/linear-regression.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+A Replication of Karlan and List (2007)
+</h5>
+<div class="card-text listing-description">
+Dean Karlan at Yale and John List at the University of Chicago conducted a field experiment to test the effectiveness of different fundraising letters. They sent out 50,000…<em></em>
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Ethan An
+</div>
+<div class="listing-date">
+Apr 23, 2025
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="1" data-listing-file-modified-sort="1744692829045">
+<a href="./project/hw1/work flow.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<div class="card-text listing-description">
+
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"></span>
+<span id="cb1-3">df <span class="op">=</span> pd.read_stata(<span class="st">'karlan_list_2007.dta'</span>)</span>
+<span id="cb1-4"></span>
+<span id="cb1-5"><span class="bu">print</span>(df.head())</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   treatment  control    ratio  ratio2  ratio3      size  size25  size50  \
+0          0 …</code></pre></div>
+</div>
+<div class="card-attribution card-text-small start">
+<div class="listing-author">
+
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="2" data-listing-file-modified-sort="1744692375680" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
 <a href="./project/hw1/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
-HW2
+HW1
 </h5>
 <div class="card-text listing-description">
 
@@ -222,7 +270,7 @@ HW2
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="1" data-listing-file-modified-sort="1743885474000" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<div class="g-col-1" data-index="3" data-listing-file-modified-sort="1743885474000" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
 <a href="./project/hw2/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
