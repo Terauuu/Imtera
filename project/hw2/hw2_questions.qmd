@@ -1,8 +1,9 @@
 ---
-title: "Poisson Regression Examples"
-author: "Your Name"
+title: "Homework 2: Poisson Regression Examples"
+author: "Ethan An"
 date: today
-callout-appearance: minimal # this hides the blue "i" icon on .callout-notes
+format: html
+categories:: [project]
 ---
 
 

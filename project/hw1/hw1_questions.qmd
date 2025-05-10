@@ -1,8 +1,9 @@
 ---
-title: "A Replication of Karlan and List (2007)"
+title: "Homework 1: A Replication of Karlan and List (2007)"
 author: "Ethan An"
 date: 04/23/2025
-callout-appearance: minimal # this hides the blue "i" icon on .callout-notes
+format: html
+categories:: [project]
 ---
 
 
