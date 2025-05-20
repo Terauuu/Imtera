@@ -1,5 +1,5 @@
 ---
-title: "Multinomial Logit Model"
+title: "Homework 3: Multinomial Logit Model"
 author: "Ethan An"
 date: today
 format: html
