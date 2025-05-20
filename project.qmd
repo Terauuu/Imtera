@@ -1,7 +1,7 @@
 ---
 title: "Ethan's project"
 listing:
-  contents: [hw1/hw1_questions.qmd, hw2/hw2_questions.qmd]
+  contents: [hw1/hw1_questions.qmd, hw2/hw2_questions.qmd, hw3/hw3_questions.qmd]
   type: grid
   sort: "date desc"
   categories: false
