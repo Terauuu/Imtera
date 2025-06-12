@@ -1008,6 +1008,7 @@ plt.ylabel("Perception Variables")
 plt.tight_layout()
 plt.show()
 ```
+
 ### Summary
 
 We successfully replicated the importance metrics table using five different methods. Johnson's relative weights were not computed due to package limitations in Python, but all other key drivers metrics were covered, including:

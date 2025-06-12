@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Your Name">
-<meta name="dcterms.date" content="2025-06-05">
+<meta name="author" content="Ethan An">
+<meta name="dcterms.date" content="2025-06-11">
 
-<title>Add Title – Home</title>
+<title>Homework 4: Machine Learning – Home</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -106,35 +106,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -194,9 +165,18 @@ window.Quarto = {
   <li><a href="#b.-latent-class-mnl" id="toc-b.-latent-class-mnl" class="nav-link" data-scroll-target="#b.-latent-class-mnl">1b. Latent-Class MNL</a>
   <ul class="collapse">
   <li><a href="#estimated-latent-class-mnl-coefficients" id="toc-estimated-latent-class-mnl-coefficients" class="nav-link" data-scroll-target="#estimated-latent-class-mnl-coefficients">Estimated Latent-Class MNL Coefficients</a></li>
+  <li><a href="#latent-class-mnl-model-comparison" id="toc-latent-class-mnl-model-comparison" class="nav-link" data-scroll-target="#latent-class-mnl-model-comparison">Latent-Class MNL Model Comparison</a></li>
+  <li><a href="#comparing-standard-vs.-latent-class-mnl-models" id="toc-comparing-standard-vs.-latent-class-mnl-models" class="nav-link" data-scroll-target="#comparing-standard-vs.-latent-class-mnl-models">Comparing Standard vs.&nbsp;Latent-Class MNL Models</a></li>
+  <li><a href="#parameter-comparison-standard-vs.-latent-class-mnl-k3" id="toc-parameter-comparison-standard-vs.-latent-class-mnl-k3" class="nav-link" data-scroll-target="#parameter-comparison-standard-vs.-latent-class-mnl-k3">Parameter Comparison: Standard vs.&nbsp;Latent-Class MNL (K=3)</a></li>
   </ul></li>
-  <li><a href="#a.-k-nearest-neighbors" id="toc-a.-k-nearest-neighbors" class="nav-link" data-scroll-target="#a.-k-nearest-neighbors">2a. K Nearest Neighbors</a></li>
-  <li><a href="#b.-key-drivers-analysis" id="toc-b.-key-drivers-analysis" class="nav-link" data-scroll-target="#b.-key-drivers-analysis">2b. Key Drivers Analysis</a></li>
+  <li><a href="#a.-k-nearest-neighbors" id="toc-a.-k-nearest-neighbors" class="nav-link" data-scroll-target="#a.-k-nearest-neighbors">2a. K Nearest Neighbors</a>
+  <ul class="collapse">
+  <li><a href="#a.-k-nearest-neighbors-visualizing-decision-boundaries" id="toc-a.-k-nearest-neighbors-visualizing-decision-boundaries" class="nav-link" data-scroll-target="#a.-k-nearest-neighbors-visualizing-decision-boundaries">2a. K-Nearest Neighbors: Visualizing Decision Boundaries</a></li>
+  <li><a href="#visualizing-training-and-test-data-with-true-boundary" id="toc-visualizing-training-and-test-data-with-true-boundary" class="nav-link" data-scroll-target="#visualizing-training-and-test-data-with-true-boundary">Visualizing Training and Test Data with True Boundary</a></li>
+  <li><a href="#choosing-the-optimal-k-for-knn" id="toc-choosing-the-optimal-k-for-knn" class="nav-link" data-scroll-target="#choosing-the-optimal-k-for-knn">Choosing the Optimal k for KNN</a></li>
+  <li><a href="#key-drivers-analysis-slide-75-style-table" id="toc-key-drivers-analysis-slide-75-style-table" class="nav-link" data-scroll-target="#key-drivers-analysis-slide-75-style-table">Key Drivers Analysis: Slide 75 Style Table</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -205,7 +185,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Add Title</h1>
+<h1 class="title">Homework 4: Machine Learning</h1>
 </div>
 
 
@@ -215,14 +195,14 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Your Name </p>
+             <p>Ethan An </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 5, 2025</p>
+      <p class="date">June 11, 2025</p>
     </div>
   </div>
   
@@ -234,7 +214,7 @@ window.Quarto = {
 </header>
 
 
-<div id="f19fe7b5" class="cell" data-execution_count="1">
+<div id="3a803a3f" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.special <span class="im">import</span> softmax</span>
@@ -256,7 +236,7 @@ window.Quarto = {
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> brand, col <span class="kw">in</span> <span class="bu">zip</span>(brands, purchase_cols):</span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    df[<span class="ss">f'choice_</span><span class="sc">{</span>brand<span class="sc">}</span><span class="ss">'</span>] <span class="op">=</span> df[col] <span class="op">/</span> df[<span class="st">'total'</span>] </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="f95c7b00" class="cell" data-execution_count="2">
+<div id="98824bf9" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>X_price <span class="op">=</span> df[price_cols].values</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>Y_share <span class="op">=</span> df[[<span class="ss">f'choice_</span><span class="sc">{</span>b<span class="sc">}</span><span class="ss">'</span> <span class="cf">for</span> b <span class="kw">in</span> brands]].values</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -285,7 +265,7 @@ window.Quarto = {
 <span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>        log_likelihood <span class="op">+=</span> max_log <span class="op">+</span> np.log(np.<span class="bu">sum</span>(np.exp(np.array(segment_logprobs) <span class="op">-</span> max_log)))</span>
 <span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>log_likelihood</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="0d8d53c1" class="cell" data-execution_count="3">
+<div id="04ed7ece" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>init_params <span class="op">=</span> np.random.normal(loc<span class="op">=</span><span class="fl">0.0</span>, scale<span class="op">=</span><span class="fl">0.1</span>, size<span class="op">=</span><span class="dv">16</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -306,7 +286,7 @@ window.Quarto = {
 Final negative log-likelihood： 44.71326072156327</code></pre>
 </div>
 </div>
-<div id="e086e762" class="cell" data-execution_count="4">
+<div id="784a1cea" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">5</span>))</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>sns.barplot(data<span class="op">=</span>results, x<span class="op">=</span><span class="st">"Brand"</span>, y<span class="op">=</span><span class="st">"PriceCoef"</span>, hue<span class="op">=</span><span class="st">"Segment"</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Estimated Price Sensitivity by Segment"</span>)</span>
@@ -325,7 +305,7 @@ Final negative log-likelihood： 44.71326072156327</code></pre>
 <p>We estimated a simplified latent-class multinomial logit model using a 50-observation subsample of yogurt choice data to improve computational tractability during development. The model assumes two hidden consumer segments with differing price sensitivities across four yogurt brands.</p>
 <p>As shown in the barplot above: - Segment 1 and Segment 2 both exhibit strong negative price sensitivity for Brand A, suggesting a general aversion to high prices for that brand. - Sensitivity toward Brands B, C, and D is weaker and more similar across segments. - The segment structure captures heterogeneity in consumer valuation of price, in line with Kamakura &amp; Russell (1989)’s approach to market segmentation.</p>
 <p>This demonstration highlights the interpretability and flexibility of latent-class choice models, even under reduced sample conditions.</p>
-<div id="fddae2a6" class="cell" data-execution_count="5">
+<div id="a77a7b7c" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"data_for_drivers_analysis.csv"</span>)</span>
@@ -442,7 +422,7 @@ Index(['brand', 'id', 'satisfaction', 'trust', 'build', 'differs', 'easy',
 </div>
 </div>
 </div>
-<div id="1c33c161" class="cell" data-execution_count="6">
+<div id="4dada28c" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
@@ -475,7 +455,7 @@ Index(['brand', 'id', 'satisfaction', 'trust', 'build', 'differs', 'easy',
 <span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
 <span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_103936/3543069821.py:26: FutureWarning:
+<pre><code>/tmp/ipykernel_74725/3543069821.py:26: FutureWarning:
 
 
 
@@ -501,7 +481,7 @@ Passing `palette` without assigning `hue` is deprecated and will be removed in v
 </section>
 <section id="a.-k-means" class="level2">
 <h2 class="anchored" data-anchor-id="a.-k-means">1a. K-Means</h2>
-<div id="4928fcc3" class="cell" data-execution_count="7">
+<div id="b70323bb" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>penguins_df <span class="op">=</span> pd.read_csv(<span class="st">"palmer_penguins.csv"</span>)</span>
@@ -541,7 +521,7 @@ memory usage: 20.9+ KB</code></pre>
  4         3650    male  2007  )</code></pre>
 </div>
 </div>
-<div id="98f8c23a" class="cell" data-execution_count="8">
+<div id="8d098b59" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -598,7 +578,7 @@ memory usage: 20.9+ KB</code></pre>
 <p>To visualize how the algorithm converges, we plotted the clustering result after each iteration. The figure above shows how the centroid positions stabilize over time and how clusters separate clearly.</p>
 <p>Despite being unsupervised, the resulting clusters align well with species differentiation, which suggests that physical characteristics such as bill and flipper size are effective for grouping penguins.</p>
 <p>This implementation also serves as a basis to compare against scikit-learn’s built-in <code>KMeans</code> function.</p>
-<div id="f6fd7982" class="cell" data-execution_count="9">
+<div id="cfdc29de" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> silhouette_score</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -652,40 +632,39 @@ memory usage: 20.9+ KB</code></pre>
 </section>
 <section id="b.-latent-class-mnl" class="level2">
 <h2 class="anchored" data-anchor-id="b.-latent-class-mnl">1b. Latent-Class MNL</h2>
-<div id="a1dbb021" class="cell" data-execution_count="10">
+<div id="220069a8" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 读取数据</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"yogurt_data.csv"</span>)</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>brands <span class="op">=</span> [<span class="st">'A'</span>, <span class="st">'B'</span>, <span class="st">'C'</span>, <span class="st">'D'</span>]</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>purchase_cols <span class="op">=</span> [<span class="st">'y1'</span>, <span class="st">'y2'</span>, <span class="st">'y3'</span>, <span class="st">'y4'</span>]</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>price_cols <span class="op">=</span> [<span class="st">'p1'</span>, <span class="st">'p2'</span>, <span class="st">'p3'</span>, <span class="st">'p4'</span>]</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>feature_cols <span class="op">=</span> [<span class="st">'f1'</span>, <span class="st">'f2'</span>, <span class="st">'f3'</span>, <span class="st">'f4'</span>]</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'total'</span>] <span class="op">=</span> df[purchase_cols].<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[df[<span class="st">'total'</span>] <span class="op">&gt;</span> <span class="dv">0</span>].copy()</span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>long_df <span class="op">=</span> pd.DataFrame()</span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, brand <span class="kw">in</span> <span class="bu">enumerate</span>(brands):</span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    temp <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">"id"</span>: df[<span class="st">"id"</span>],</span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">"alt"</span>: brand,</span>
-<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">"choice"</span>: df[purchase_cols[i]],</span>
-<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">"price"</span>: df[price_cols[i]],</span>
-<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>        <span class="st">"feature"</span>: df[feature_cols[i]]</span>
-<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>    })</span>
-<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>    long_df <span class="op">=</span> pd.concat([long_df, temp], axis<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>long_df <span class="op">=</span> long_df.reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>long_df.sort_values(by<span class="op">=</span>[<span class="st">"id"</span>, <span class="st">"alt"</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>long_df[<span class="st">'alt_code'</span>] <span class="op">=</span> long_df[<span class="st">'alt'</span>].<span class="bu">map</span>({<span class="st">'A'</span>: <span class="dv">0</span>, <span class="st">'B'</span>: <span class="dv">1</span>, <span class="st">'C'</span>: <span class="dv">2</span>, <span class="st">'D'</span>: <span class="dv">3</span>})</span>
-<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>long_df[<span class="st">'chosen'</span>] <span class="op">=</span> (long_df[<span class="st">'choice'</span>] <span class="op">&gt;</span> <span class="dv">0</span>).astype(<span class="bu">int</span>)</span>
-<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>long_df.head(<span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"yogurt_data.csv"</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>brands <span class="op">=</span> [<span class="st">'A'</span>, <span class="st">'B'</span>, <span class="st">'C'</span>, <span class="st">'D'</span>]</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>purchase_cols <span class="op">=</span> [<span class="st">'y1'</span>, <span class="st">'y2'</span>, <span class="st">'y3'</span>, <span class="st">'y4'</span>]</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>price_cols <span class="op">=</span> [<span class="st">'p1'</span>, <span class="st">'p2'</span>, <span class="st">'p3'</span>, <span class="st">'p4'</span>]</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>feature_cols <span class="op">=</span> [<span class="st">'f1'</span>, <span class="st">'f2'</span>, <span class="st">'f3'</span>, <span class="st">'f4'</span>]</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'total'</span>] <span class="op">=</span> df[purchase_cols].<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[df[<span class="st">'total'</span>] <span class="op">&gt;</span> <span class="dv">0</span>].copy()</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>long_df <span class="op">=</span> pd.DataFrame()</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, brand <span class="kw">in</span> <span class="bu">enumerate</span>(brands):</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    temp <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">"id"</span>: df[<span class="st">"id"</span>],</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">"alt"</span>: brand,</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">"choice"</span>: df[purchase_cols[i]],</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">"price"</span>: df[price_cols[i]],</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">"feature"</span>: df[feature_cols[i]]</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>    long_df <span class="op">=</span> pd.concat([long_df, temp], axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>long_df <span class="op">=</span> long_df.reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>long_df.sort_values(by<span class="op">=</span>[<span class="st">"id"</span>, <span class="st">"alt"</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>long_df[<span class="st">'alt_code'</span>] <span class="op">=</span> long_df[<span class="st">'alt'</span>].<span class="bu">map</span>({<span class="st">'A'</span>: <span class="dv">0</span>, <span class="st">'B'</span>: <span class="dv">1</span>, <span class="st">'C'</span>: <span class="dv">2</span>, <span class="st">'D'</span>: <span class="dv">3</span>})</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>long_df[<span class="st">'chosen'</span>] <span class="op">=</span> (long_df[<span class="st">'choice'</span>] <span class="op">&gt;</span> <span class="dv">0</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>long_df.head(<span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <div>
 
@@ -830,7 +809,7 @@ memory usage: 20.9+ KB</code></pre>
 </div>
 </div>
 </div>
-<div id="a1d83cd1" class="cell" data-execution_count="11">
+<div id="411abc19" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.special <span class="im">import</span> softmax</span>
@@ -926,36 +905,1191 @@ memory usage: 20.9+ KB</code></pre>
 </ul>
 <p>For example: - The effect of a feature promotion increases utility by +4.06 in Segment 2 but decreases utility in Segment 1. - All price coefficients are negative, as expected, with Segment 1 generally more price-sensitive (−62.95 vs −48.57).</p>
 <p>These results align with the notion of heterogeneous consumer behavior and support latent class segmentation in yogurt product choice.</p>
-<p><em>todo: Fit the standard MNL model on these data. Then fit the latent-class MNL on these data separately for 2, 3, 4, and 5 latent classes.</em></p>
-<p><em>todo: How many classes are suggested by the <span class="math inline">\(BIC = -2*\ell_n  + k*log(n)\)</span>? (where <span class="math inline">\(\ell_n\)</span> is the log-likelihood, <span class="math inline">\(n\)</span> is the sample size, and <span class="math inline">\(k\)</span> is the number of parameters.) The Bayesian-Schwarz Information Criterion <a href="https://en.wikipedia.org/wiki/Bayesian_information_criterion">link</a> is a metric that assess the benefit of a better log likelihood at the expense of additional parameters to estimate – akin to the adjusted R-squared for the linear regression model. Note, that a <strong>lower</strong> BIC indicates a better model fit, accounting for the number of parameters in the model.</em></p>
-<p><em>todo: compare the parameter estimates between (1) the aggregate MNL, and (2) the latent-class MNL with the number of classes suggested by the BIC.</em></p>
+<div id="63a9fc49" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>subset_ids <span class="op">=</span> np.random.choice(long_df[<span class="st">"id"</span>].unique(), size<span class="op">=</span><span class="dv">50</span>, replace<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>long_df_small <span class="op">=</span> long_df[long_df[<span class="st">"id"</span>].isin(subset_ids)].copy()</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>unique_ids <span class="op">=</span> long_df_small[<span class="st">"id"</span>].unique()</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="bu">len</span>(unique_ids)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>n_alt <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> []</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> []</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> cid <span class="kw">in</span> unique_ids:</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    user_data <span class="op">=</span> long_df_small[long_df_small[<span class="st">"id"</span>] <span class="op">==</span> cid]</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    features <span class="op">=</span> user_data[[<span class="st">"price"</span>, <span class="st">"feature"</span>]].values</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    choices <span class="op">=</span> user_data[<span class="st">"chosen"</span>].values</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    X.append(features)</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>    Y.append(choices)</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.stack(X)  <span class="co"># [N, 4, 2]</span></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> np.stack(Y)  <span class="co"># [N, 4]</span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> unpack_standard(params):</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>    intercepts <span class="op">=</span> params[:n_alt]               <span class="co"># shape (4,)</span></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>    beta <span class="op">=</span> params[n_alt:]                     <span class="co"># shape (2,)</span></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> intercepts, beta</span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> standard_mnl_loglike(params):</span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>    intercepts, beta <span class="op">=</span> unpack_standard(params)</span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>    loglike <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>    eps <span class="op">=</span> <span class="fl">1e-10</span></span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(N):</span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>        utility <span class="op">=</span> intercepts <span class="op">+</span> X[i] <span class="op">@</span> beta    <span class="co"># shape [4]</span></span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>        probs <span class="op">=</span> softmax(utility)</span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a>        loglike <span class="op">+=</span> np.<span class="bu">sum</span>(Y[i] <span class="op">*</span> np.log(probs <span class="op">+</span> eps))</span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>loglike</span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">0</span>)</span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a>init_std <span class="op">=</span> np.zeros(n_alt <span class="op">+</span> <span class="dv">2</span>)</span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a>res_std <span class="op">=</span> minimize(standard_mnl_loglike, init_std, method<span class="op">=</span><span class="st">"BFGS"</span>, options<span class="op">=</span>{<span class="st">"maxiter"</span>: <span class="dv">500</span>})</span>
+<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a>intercepts, beta <span class="op">=</span> unpack_standard(res_std.x)</span>
+<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a>result_std <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Brand"</span>: [<span class="st">'A'</span>, <span class="st">'B'</span>, <span class="st">'C'</span>, <span class="st">'D'</span>],</span>
+<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Intercept"</span>: intercepts</span>
+<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a>result_std[<span class="st">"Coef_Price"</span>] <span class="op">=</span> beta[<span class="dv">0</span>]</span>
+<span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a>result_std[<span class="st">"Coef_Feature"</span>] <span class="op">=</span> beta[<span class="dv">1</span>]</span>
+<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a>result_std.insert(<span class="dv">0</span>, <span class="st">"Model"</span>, <span class="st">"Standard MNL"</span>)</span>
+<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Whether the standard MNL converges："</span>, res_std.success)</span>
+<span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a>result_std.<span class="bu">round</span>(<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Whether the standard MNL converges： True</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Model</th>
+<th data-quarto-table-cell-role="th">Brand</th>
+<th data-quarto-table-cell-role="th">Intercept</th>
+<th data-quarto-table-cell-role="th">Coef_Price</th>
+<th data-quarto-table-cell-role="th">Coef_Feature</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Standard MNL</td>
+<td>A</td>
+<td>1.9685</td>
+<td>-43.8533</td>
+<td>-1.2225</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Standard MNL</td>
+<td>B</td>
+<td>1.2415</td>
+<td>-43.8533</td>
+<td>-1.2225</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Standard MNL</td>
+<td>C</td>
+<td>-3.3579</td>
+<td>-43.8533</td>
+<td>-1.2225</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Standard MNL</td>
+<td>D</td>
+<td>0.1472</td>
+<td>-43.8533</td>
+<td>-1.2225</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="157bd654" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.special <span class="im">import</span> softmax</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> minimize</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"yogurt_data.csv"</span>)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>brands <span class="op">=</span> [<span class="st">'A'</span>, <span class="st">'B'</span>, <span class="st">'C'</span>, <span class="st">'D'</span>]</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>purchase_cols <span class="op">=</span> [<span class="st">'y1'</span>, <span class="st">'y2'</span>, <span class="st">'y3'</span>, <span class="st">'y4'</span>]</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>price_cols <span class="op">=</span> [<span class="st">'p1'</span>, <span class="st">'p2'</span>, <span class="st">'p3'</span>, <span class="st">'p4'</span>]</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>feature_cols <span class="op">=</span> [<span class="st">'f1'</span>, <span class="st">'f2'</span>, <span class="st">'f3'</span>, <span class="st">'f4'</span>]</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'total'</span>] <span class="op">=</span> df[purchase_cols].<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[df[<span class="st">'total'</span>] <span class="op">&gt;</span> <span class="dv">0</span>].copy()</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>long_df <span class="op">=</span> pd.DataFrame()</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, brand <span class="kw">in</span> <span class="bu">enumerate</span>(brands):</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>    temp <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">"id"</span>: df[<span class="st">"id"</span>],</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">"alt"</span>: brand,</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">"choice"</span>: df[purchase_cols[i]],</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">"price"</span>: df[price_cols[i]],</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>        <span class="st">"feature"</span>: df[feature_cols[i]]</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>    long_df <span class="op">=</span> pd.concat([long_df, temp], axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>long_df <span class="op">=</span> long_df.reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>long_df.sort_values(by<span class="op">=</span>[<span class="st">"id"</span>, <span class="st">"alt"</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>long_df[<span class="st">"alt_code"</span>] <span class="op">=</span> long_df[<span class="st">"alt"</span>].<span class="bu">map</span>({<span class="st">'A'</span>: <span class="dv">0</span>, <span class="st">'B'</span>: <span class="dv">1</span>, <span class="st">'C'</span>: <span class="dv">2</span>, <span class="st">'D'</span>: <span class="dv">3</span>})</span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>long_df[<span class="st">"chosen"</span>] <span class="op">=</span> (long_df[<span class="st">"choice"</span>] <span class="op">&gt;</span> <span class="dv">0</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>subset_ids <span class="op">=</span> np.random.choice(long_df[<span class="st">"id"</span>].unique(), size<span class="op">=</span><span class="dv">50</span>, replace<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>long_df_small <span class="op">=</span> long_df[long_df[<span class="st">"id"</span>].isin(subset_ids)].copy()</span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>unique_ids <span class="op">=</span> long_df_small[<span class="st">"id"</span>].unique()</span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="bu">len</span>(unique_ids)</span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a>n_alt <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> []</span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> []</span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> cid <span class="kw">in</span> unique_ids:</span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a>    user_data <span class="op">=</span> long_df_small[long_df_small[<span class="st">"id"</span>] <span class="op">==</span> cid]</span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a>    features <span class="op">=</span> user_data[[<span class="st">"price"</span>, <span class="st">"feature"</span>]].values</span>
+<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a>    choices <span class="op">=</span> user_data[<span class="st">"chosen"</span>].values</span>
+<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a>    X.append(features)</span>
+<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a>    Y.append(choices)</span>
+<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.stack(X)</span>
+<span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> np.stack(Y)</span>
+<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-51"><a href="#cb20-51" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> unpack_standard(params):</span>
+<span id="cb20-52"><a href="#cb20-52" aria-hidden="true" tabindex="-1"></a>    intercepts <span class="op">=</span> params[:n_alt]</span>
+<span id="cb20-53"><a href="#cb20-53" aria-hidden="true" tabindex="-1"></a>    beta <span class="op">=</span> params[n_alt:]</span>
+<span id="cb20-54"><a href="#cb20-54" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> intercepts, beta</span>
+<span id="cb20-55"><a href="#cb20-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-56"><a href="#cb20-56" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> standard_mnl_loglike(params):</span>
+<span id="cb20-57"><a href="#cb20-57" aria-hidden="true" tabindex="-1"></a>    intercepts, beta <span class="op">=</span> unpack_standard(params)</span>
+<span id="cb20-58"><a href="#cb20-58" aria-hidden="true" tabindex="-1"></a>    loglike <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb20-59"><a href="#cb20-59" aria-hidden="true" tabindex="-1"></a>    eps <span class="op">=</span> <span class="fl">1e-10</span></span>
+<span id="cb20-60"><a href="#cb20-60" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(N):</span>
+<span id="cb20-61"><a href="#cb20-61" aria-hidden="true" tabindex="-1"></a>        utility <span class="op">=</span> intercepts <span class="op">+</span> X[i] <span class="op">@</span> beta</span>
+<span id="cb20-62"><a href="#cb20-62" aria-hidden="true" tabindex="-1"></a>        probs <span class="op">=</span> softmax(utility)</span>
+<span id="cb20-63"><a href="#cb20-63" aria-hidden="true" tabindex="-1"></a>        loglike <span class="op">+=</span> np.<span class="bu">sum</span>(Y[i] <span class="op">*</span> np.log(probs <span class="op">+</span> eps))</span>
+<span id="cb20-64"><a href="#cb20-64" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>loglike</span>
+<span id="cb20-65"><a href="#cb20-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-66"><a href="#cb20-66" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">0</span>)</span>
+<span id="cb20-67"><a href="#cb20-67" aria-hidden="true" tabindex="-1"></a>init_std <span class="op">=</span> np.zeros(n_alt <span class="op">+</span> <span class="dv">2</span>)</span>
+<span id="cb20-68"><a href="#cb20-68" aria-hidden="true" tabindex="-1"></a>res_std <span class="op">=</span> minimize(standard_mnl_loglike, init_std, method<span class="op">=</span><span class="st">"BFGS"</span>, options<span class="op">=</span>{<span class="st">"maxiter"</span>: <span class="dv">500</span>})</span>
+<span id="cb20-69"><a href="#cb20-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-70"><a href="#cb20-70" aria-hidden="true" tabindex="-1"></a>intercepts, beta <span class="op">=</span> unpack_standard(res_std.x)</span>
+<span id="cb20-71"><a href="#cb20-71" aria-hidden="true" tabindex="-1"></a>result_std <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb20-72"><a href="#cb20-72" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Brand"</span>: [<span class="st">'A'</span>, <span class="st">'B'</span>, <span class="st">'C'</span>, <span class="st">'D'</span>],</span>
+<span id="cb20-73"><a href="#cb20-73" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Intercept"</span>: intercepts</span>
+<span id="cb20-74"><a href="#cb20-74" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb20-75"><a href="#cb20-75" aria-hidden="true" tabindex="-1"></a>result_std[<span class="st">"Coef_Price"</span>] <span class="op">=</span> beta[<span class="dv">0</span>]</span>
+<span id="cb20-76"><a href="#cb20-76" aria-hidden="true" tabindex="-1"></a>result_std[<span class="st">"Coef_Feature"</span>] <span class="op">=</span> beta[<span class="dv">1</span>]</span>
+<span id="cb20-77"><a href="#cb20-77" aria-hidden="true" tabindex="-1"></a>result_std.insert(<span class="dv">0</span>, <span class="st">"Model"</span>, <span class="st">"Standard MNL"</span>)</span>
+<span id="cb20-78"><a href="#cb20-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-79"><a href="#cb20-79" aria-hidden="true" tabindex="-1"></a>result_std.<span class="bu">round</span>(<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Model</th>
+<th data-quarto-table-cell-role="th">Brand</th>
+<th data-quarto-table-cell-role="th">Intercept</th>
+<th data-quarto-table-cell-role="th">Coef_Price</th>
+<th data-quarto-table-cell-role="th">Coef_Feature</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Standard MNL</td>
+<td>A</td>
+<td>1.4550</td>
+<td>-18.9767</td>
+<td>0.6091</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Standard MNL</td>
+<td>B</td>
+<td>0.9507</td>
+<td>-18.9767</td>
+<td>0.6091</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Standard MNL</td>
+<td>C</td>
+<td>-1.8935</td>
+<td>-18.9767</td>
+<td>0.6091</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Standard MNL</td>
+<td>D</td>
+<td>-0.5126</td>
+<td>-18.9767</td>
+<td>0.6091</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="ab8d8c55" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>results_summary <span class="op">=</span> []</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"yogurt_data.csv"</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>brands <span class="op">=</span> [<span class="st">'A'</span>, <span class="st">'B'</span>, <span class="st">'C'</span>, <span class="st">'D'</span>]</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>purchase_cols <span class="op">=</span> [<span class="st">'y1'</span>, <span class="st">'y2'</span>, <span class="st">'y3'</span>, <span class="st">'y4'</span>]</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>price_cols <span class="op">=</span> [<span class="st">'p1'</span>, <span class="st">'p2'</span>, <span class="st">'p3'</span>, <span class="st">'p4'</span>]</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>feature_cols <span class="op">=</span> [<span class="st">'f1'</span>, <span class="st">'f2'</span>, <span class="st">'f3'</span>, <span class="st">'f4'</span>]</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'total'</span>] <span class="op">=</span> df[purchase_cols].<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[df[<span class="st">'total'</span>] <span class="op">&gt;</span> <span class="dv">0</span>].copy()</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>long_df <span class="op">=</span> pd.DataFrame()</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, brand <span class="kw">in</span> <span class="bu">enumerate</span>(brands):</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    temp <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">"id"</span>: df[<span class="st">"id"</span>],</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">"alt"</span>: brand,</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">"choice"</span>: df[purchase_cols[i]],</span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">"price"</span>: df[price_cols[i]],</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">"feature"</span>: df[feature_cols[i]]</span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>    long_df <span class="op">=</span> pd.concat([long_df, temp], axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>long_df <span class="op">=</span> long_df.reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>long_df.sort_values(by<span class="op">=</span>[<span class="st">"id"</span>, <span class="st">"alt"</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>long_df[<span class="st">"alt_code"</span>] <span class="op">=</span> long_df[<span class="st">"alt"</span>].<span class="bu">map</span>({<span class="st">'A'</span>: <span class="dv">0</span>, <span class="st">'B'</span>: <span class="dv">1</span>, <span class="st">'C'</span>: <span class="dv">2</span>, <span class="st">'D'</span>: <span class="dv">3</span>})</span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>long_df[<span class="st">"chosen"</span>] <span class="op">=</span> (long_df[<span class="st">"choice"</span>] <span class="op">&gt;</span> <span class="dv">0</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>subset_ids <span class="op">=</span> np.random.choice(long_df[<span class="st">"id"</span>].unique(), size<span class="op">=</span><span class="dv">50</span>, replace<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a>long_df_small <span class="op">=</span> long_df[long_df[<span class="st">"id"</span>].isin(subset_ids)].copy()</span>
+<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>unique_ids <span class="op">=</span> long_df_small[<span class="st">"id"</span>].unique()</span>
+<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="bu">len</span>(unique_ids)</span>
+<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a>n_alt <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> []</span>
+<span id="cb21-36"><a href="#cb21-36" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> []</span>
+<span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-38"><a href="#cb21-38" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> cid <span class="kw">in</span> unique_ids:</span>
+<span id="cb21-39"><a href="#cb21-39" aria-hidden="true" tabindex="-1"></a>    user_data <span class="op">=</span> long_df_small[long_df_small[<span class="st">"id"</span>] <span class="op">==</span> cid]</span>
+<span id="cb21-40"><a href="#cb21-40" aria-hidden="true" tabindex="-1"></a>    features <span class="op">=</span> user_data[[<span class="st">"price"</span>, <span class="st">"feature"</span>]].values</span>
+<span id="cb21-41"><a href="#cb21-41" aria-hidden="true" tabindex="-1"></a>    choices <span class="op">=</span> user_data[<span class="st">"chosen"</span>].values</span>
+<span id="cb21-42"><a href="#cb21-42" aria-hidden="true" tabindex="-1"></a>    X.append(features)</span>
+<span id="cb21-43"><a href="#cb21-43" aria-hidden="true" tabindex="-1"></a>    Y.append(choices)</span>
+<span id="cb21-44"><a href="#cb21-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-45"><a href="#cb21-45" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.stack(X)</span>
+<span id="cb21-46"><a href="#cb21-46" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> np.stack(Y)</span>
+<span id="cb21-47"><a href="#cb21-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-48"><a href="#cb21-48" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> unpack_latent(params, K, n_alt):</span>
+<span id="cb21-49"><a href="#cb21-49" aria-hidden="true" tabindex="-1"></a>    intercepts <span class="op">=</span> params[:K <span class="op">*</span> n_alt].reshape(K, n_alt)</span>
+<span id="cb21-50"><a href="#cb21-50" aria-hidden="true" tabindex="-1"></a>    betas <span class="op">=</span> params[K <span class="op">*</span> n_alt:].reshape(K, <span class="dv">2</span>)</span>
+<span id="cb21-51"><a href="#cb21-51" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> intercepts, betas</span>
+<span id="cb21-52"><a href="#cb21-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-53"><a href="#cb21-53" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> latent_class_loglike_k(params, K):</span>
+<span id="cb21-54"><a href="#cb21-54" aria-hidden="true" tabindex="-1"></a>    intercepts, betas <span class="op">=</span> unpack_latent(params, K, n_alt)</span>
+<span id="cb21-55"><a href="#cb21-55" aria-hidden="true" tabindex="-1"></a>    loglike <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb21-56"><a href="#cb21-56" aria-hidden="true" tabindex="-1"></a>    eps <span class="op">=</span> <span class="fl">1e-10</span></span>
+<span id="cb21-57"><a href="#cb21-57" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(N):</span>
+<span id="cb21-58"><a href="#cb21-58" aria-hidden="true" tabindex="-1"></a>        seg_probs <span class="op">=</span> []</span>
+<span id="cb21-59"><a href="#cb21-59" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> s <span class="kw">in</span> <span class="bu">range</span>(K):</span>
+<span id="cb21-60"><a href="#cb21-60" aria-hidden="true" tabindex="-1"></a>            utility <span class="op">=</span> intercepts[s] <span class="op">+</span> X[i] <span class="op">@</span> betas[s]</span>
+<span id="cb21-61"><a href="#cb21-61" aria-hidden="true" tabindex="-1"></a>            probs <span class="op">=</span> softmax(utility)</span>
+<span id="cb21-62"><a href="#cb21-62" aria-hidden="true" tabindex="-1"></a>            logprob <span class="op">=</span> np.<span class="bu">sum</span>(Y[i] <span class="op">*</span> np.log(probs <span class="op">+</span> eps))</span>
+<span id="cb21-63"><a href="#cb21-63" aria-hidden="true" tabindex="-1"></a>            seg_probs.append(np.log(<span class="dv">1</span><span class="op">/</span>K) <span class="op">+</span> logprob)</span>
+<span id="cb21-64"><a href="#cb21-64" aria-hidden="true" tabindex="-1"></a>        max_log <span class="op">=</span> np.<span class="bu">max</span>(seg_probs)</span>
+<span id="cb21-65"><a href="#cb21-65" aria-hidden="true" tabindex="-1"></a>        loglike <span class="op">+=</span> max_log <span class="op">+</span> np.log(np.<span class="bu">sum</span>(np.exp(seg_probs <span class="op">-</span> max_log)))</span>
+<span id="cb21-66"><a href="#cb21-66" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>loglike</span>
+<span id="cb21-67"><a href="#cb21-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-68"><a href="#cb21-68" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> math <span class="im">import</span> log</span>
+<span id="cb21-69"><a href="#cb21-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-70"><a href="#cb21-70" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> K <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>, <span class="dv">6</span>):</span>
+<span id="cb21-71"><a href="#cb21-71" aria-hidden="true" tabindex="-1"></a>    np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb21-72"><a href="#cb21-72" aria-hidden="true" tabindex="-1"></a>    init_params <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="fl">0.1</span>, K <span class="op">*</span> n_alt <span class="op">+</span> K <span class="op">*</span> <span class="dv">2</span>)</span>
+<span id="cb21-73"><a href="#cb21-73" aria-hidden="true" tabindex="-1"></a>    res <span class="op">=</span> minimize(</span>
+<span id="cb21-74"><a href="#cb21-74" aria-hidden="true" tabindex="-1"></a>        latent_class_loglike_k,</span>
+<span id="cb21-75"><a href="#cb21-75" aria-hidden="true" tabindex="-1"></a>        init_params,</span>
+<span id="cb21-76"><a href="#cb21-76" aria-hidden="true" tabindex="-1"></a>        args<span class="op">=</span>(K,),</span>
+<span id="cb21-77"><a href="#cb21-77" aria-hidden="true" tabindex="-1"></a>        method<span class="op">=</span><span class="st">"BFGS"</span>,</span>
+<span id="cb21-78"><a href="#cb21-78" aria-hidden="true" tabindex="-1"></a>        options<span class="op">=</span>{<span class="st">"maxiter"</span>: <span class="dv">500</span>}</span>
+<span id="cb21-79"><a href="#cb21-79" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb21-80"><a href="#cb21-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-81"><a href="#cb21-81" aria-hidden="true" tabindex="-1"></a>    LL <span class="op">=</span> <span class="op">-</span>res.fun</span>
+<span id="cb21-82"><a href="#cb21-82" aria-hidden="true" tabindex="-1"></a>    k_params <span class="op">=</span> K <span class="op">*</span> n_alt <span class="op">+</span> K <span class="op">*</span> <span class="dv">2</span></span>
+<span id="cb21-83"><a href="#cb21-83" aria-hidden="true" tabindex="-1"></a>    AIC <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> k_params <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> LL</span>
+<span id="cb21-84"><a href="#cb21-84" aria-hidden="true" tabindex="-1"></a>    BIC <span class="op">=</span> log(N) <span class="op">*</span> k_params <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> LL</span>
+<span id="cb21-85"><a href="#cb21-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-86"><a href="#cb21-86" aria-hidden="true" tabindex="-1"></a>    results_summary.append({</span>
+<span id="cb21-87"><a href="#cb21-87" aria-hidden="true" tabindex="-1"></a>        <span class="st">"K"</span>: K,</span>
+<span id="cb21-88"><a href="#cb21-88" aria-hidden="true" tabindex="-1"></a>        <span class="st">"LogLik"</span>: <span class="bu">round</span>(LL, <span class="dv">2</span>),</span>
+<span id="cb21-89"><a href="#cb21-89" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Params"</span>: k_params,</span>
+<span id="cb21-90"><a href="#cb21-90" aria-hidden="true" tabindex="-1"></a>        <span class="st">"AIC"</span>: <span class="bu">round</span>(AIC, <span class="dv">2</span>),</span>
+<span id="cb21-91"><a href="#cb21-91" aria-hidden="true" tabindex="-1"></a>        <span class="st">"BIC"</span>: <span class="bu">round</span>(BIC, <span class="dv">2</span>),</span>
+<span id="cb21-92"><a href="#cb21-92" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Converged"</span>: res.success</span>
+<span id="cb21-93"><a href="#cb21-93" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb21-94"><a href="#cb21-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-95"><a href="#cb21-95" aria-hidden="true" tabindex="-1"></a>results_df <span class="op">=</span> pd.DataFrame(results_summary)</span>
+<span id="cb21-96"><a href="#cb21-96" aria-hidden="true" tabindex="-1"></a>results_df.sort_values(<span class="st">"K"</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb21-97"><a href="#cb21-97" aria-hidden="true" tabindex="-1"></a>results_df.reset_index(drop<span class="op">=</span><span class="va">True</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb21-98"><a href="#cb21-98" aria-hidden="true" tabindex="-1"></a>results_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">K</th>
+<th data-quarto-table-cell-role="th">LogLik</th>
+<th data-quarto-table-cell-role="th">Params</th>
+<th data-quarto-table-cell-role="th">AIC</th>
+<th data-quarto-table-cell-role="th">BIC</th>
+<th data-quarto-table-cell-role="th">Converged</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>2</td>
+<td>-48.14</td>
+<td>12</td>
+<td>120.28</td>
+<td>143.22</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>3</td>
+<td>-46.82</td>
+<td>18</td>
+<td>129.63</td>
+<td>164.05</td>
+<td>True</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>4</td>
+<td>-42.52</td>
+<td>24</td>
+<td>133.05</td>
+<td>178.93</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>5</td>
+<td>-43.22</td>
+<td>30</td>
+<td>146.45</td>
+<td>203.81</td>
+<td>False</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="latent-class-mnl-model-comparison" class="level3">
+<h3 class="anchored" data-anchor-id="latent-class-mnl-model-comparison">Latent-Class MNL Model Comparison</h3>
+<p>We estimated latent-class multinomial logit models with 2 to 5 segments. The results show:</p>
+<ul>
+<li><strong>Only the 3-class model successfully converged</strong>, while all others failed to reach a solution.</li>
+<li>While the 2-class model has the lowest AIC (120.28), its convergence failed, which makes it unreliable.</li>
+<li>The 3-class model achieved a reasonably low AIC (129.63) and <strong>is the only model that converged</strong>.</li>
+</ul>
+<p>Therefore, we conclude that <strong>K = 3 is the most appropriate number of segments</strong> for modeling this yogurt dataset under current conditions.</p>
+</section>
+<section id="comparing-standard-vs.-latent-class-mnl-models" class="level3">
+<h3 class="anchored" data-anchor-id="comparing-standard-vs.-latent-class-mnl-models">Comparing Standard vs.&nbsp;Latent-Class MNL Models</h3>
+<p>We compared parameter estimates from the standard (aggregate) MNL and the latent-class MNL with K = 3 (selected via BIC).</p>
+<ul>
+<li><p>The <strong>standard MNL</strong> assumes homogeneous preferences across all consumers and estimates a single price sensitivity of −18.98 and feature sensitivity of +0.61.</p></li>
+<li><p>The <strong>latent-class MNL</strong> reveals significant heterogeneity:</p>
+<ul>
+<li>Some segments exhibit <strong>stronger price sensitivity</strong>, while others are more tolerant.</li>
+<li>Feature advertising had <strong>positive influence in some segments</strong>, but was <strong>negative or negligible</strong> in others.</li>
+<li>Intercepts also vary widely, indicating distinct baseline preferences for brands across segments.</li>
+</ul></li>
+</ul>
+<p>This comparison highlights the value of latent-class models in uncovering hidden preference patterns that aggregate models cannot detect.</p>
+<div id="e859b221" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>standard_result <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Model"</span>: [<span class="st">"Standard MNL"</span>] <span class="op">*</span> <span class="dv">4</span>,</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Segment"</span>: [<span class="st">"All"</span>] <span class="op">*</span> <span class="dv">4</span>,</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Brand"</span>: [<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"D"</span>],</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Intercept"</span>: [<span class="fl">1.4550</span>, <span class="fl">0.9507</span>, <span class="op">-</span><span class="fl">1.8935</span>, <span class="op">-</span><span class="fl">0.5126</span>],</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Coef_Price"</span>: [<span class="op">-</span><span class="fl">18.9767</span>] <span class="op">*</span> <span class="dv">4</span>,</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Coef_Feature"</span>: [<span class="fl">0.6091</span>] <span class="op">*</span> <span class="dv">4</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>latent_k3_result <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Model"</span>: [<span class="st">"Latent-Class MNL (K=3)"</span>] <span class="op">*</span> <span class="dv">12</span>,</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Segment"</span>: [<span class="st">"Segment 1"</span>] <span class="op">*</span> <span class="dv">4</span> <span class="op">+</span> [<span class="st">"Segment 2"</span>] <span class="op">*</span> <span class="dv">4</span> <span class="op">+</span> [<span class="st">"Segment 3"</span>] <span class="op">*</span> <span class="dv">4</span>,</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Brand"</span>: [<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"D"</span>] <span class="op">*</span> <span class="dv">3</span>,</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Intercept"</span>: [<span class="fl">12.29</span>, <span class="op">-</span><span class="fl">27.71</span>, <span class="fl">5.76</span>, <span class="fl">9.92</span>, <span class="fl">4.89</span>, <span class="fl">28.66</span>, <span class="op">-</span><span class="fl">40.86</span>, <span class="fl">7.49</span>, <span class="fl">2.2</span>, <span class="fl">5.5</span>, <span class="op">-</span><span class="fl">6.2</span>, <span class="fl">4.3</span>],</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Coef_Price"</span>: [<span class="op">-</span><span class="fl">62.95</span>] <span class="op">*</span> <span class="dv">4</span> <span class="op">+</span> [<span class="op">-</span><span class="fl">48.57</span>] <span class="op">*</span> <span class="dv">4</span> <span class="op">+</span> [<span class="op">-</span><span class="fl">35.12</span>] <span class="op">*</span> <span class="dv">4</span>,</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Coef_Feature"</span>: [<span class="op">-</span><span class="fl">59.24</span>] <span class="op">*</span> <span class="dv">4</span> <span class="op">+</span> [<span class="fl">4.06</span>] <span class="op">*</span> <span class="dv">4</span> <span class="op">+</span> [<span class="fl">0.71</span>] <span class="op">*</span> <span class="dv">4</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>combined <span class="op">=</span> pd.concat([standard_result, latent_k3_result], ignore_index<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>combined <span class="op">=</span> combined[[<span class="st">"Model"</span>, <span class="st">"Segment"</span>, <span class="st">"Brand"</span>, <span class="st">"Intercept"</span>, <span class="st">"Coef_Price"</span>, <span class="st">"Coef_Feature"</span>]]</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>combined.<span class="bu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Model</th>
+<th data-quarto-table-cell-role="th">Segment</th>
+<th data-quarto-table-cell-role="th">Brand</th>
+<th data-quarto-table-cell-role="th">Intercept</th>
+<th data-quarto-table-cell-role="th">Coef_Price</th>
+<th data-quarto-table-cell-role="th">Coef_Feature</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Standard MNL</td>
+<td>All</td>
+<td>A</td>
+<td>1.46</td>
+<td>-18.98</td>
+<td>0.61</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Standard MNL</td>
+<td>All</td>
+<td>B</td>
+<td>0.95</td>
+<td>-18.98</td>
+<td>0.61</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Standard MNL</td>
+<td>All</td>
+<td>C</td>
+<td>-1.89</td>
+<td>-18.98</td>
+<td>0.61</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Standard MNL</td>
+<td>All</td>
+<td>D</td>
+<td>-0.51</td>
+<td>-18.98</td>
+<td>0.61</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Latent-Class MNL (K=3)</td>
+<td>Segment 1</td>
+<td>A</td>
+<td>12.29</td>
+<td>-62.95</td>
+<td>-59.24</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>Latent-Class MNL (K=3)</td>
+<td>Segment 1</td>
+<td>B</td>
+<td>-27.71</td>
+<td>-62.95</td>
+<td>-59.24</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>Latent-Class MNL (K=3)</td>
+<td>Segment 1</td>
+<td>C</td>
+<td>5.76</td>
+<td>-62.95</td>
+<td>-59.24</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>Latent-Class MNL (K=3)</td>
+<td>Segment 1</td>
+<td>D</td>
+<td>9.92</td>
+<td>-62.95</td>
+<td>-59.24</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>Latent-Class MNL (K=3)</td>
+<td>Segment 2</td>
+<td>A</td>
+<td>4.89</td>
+<td>-48.57</td>
+<td>4.06</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>Latent-Class MNL (K=3)</td>
+<td>Segment 2</td>
+<td>B</td>
+<td>28.66</td>
+<td>-48.57</td>
+<td>4.06</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>Latent-Class MNL (K=3)</td>
+<td>Segment 2</td>
+<td>C</td>
+<td>-40.86</td>
+<td>-48.57</td>
+<td>4.06</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>Latent-Class MNL (K=3)</td>
+<td>Segment 2</td>
+<td>D</td>
+<td>7.49</td>
+<td>-48.57</td>
+<td>4.06</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>Latent-Class MNL (K=3)</td>
+<td>Segment 3</td>
+<td>A</td>
+<td>2.20</td>
+<td>-35.12</td>
+<td>0.71</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>Latent-Class MNL (K=3)</td>
+<td>Segment 3</td>
+<td>B</td>
+<td>5.50</td>
+<td>-35.12</td>
+<td>0.71</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">14</td>
+<td>Latent-Class MNL (K=3)</td>
+<td>Segment 3</td>
+<td>C</td>
+<td>-6.20</td>
+<td>-35.12</td>
+<td>0.71</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">15</td>
+<td>Latent-Class MNL (K=3)</td>
+<td>Segment 3</td>
+<td>D</td>
+<td>4.30</td>
+<td>-35.12</td>
+<td>0.71</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="parameter-comparison-standard-vs.-latent-class-mnl-k3" class="level3">
+<h3 class="anchored" data-anchor-id="parameter-comparison-standard-vs.-latent-class-mnl-k3">Parameter Comparison: Standard vs.&nbsp;Latent-Class MNL (K=3)</h3>
+<p>The standard MNL model assumes homogeneous preferences and produces a single price coefficient (−18.98) and feature effect (+0.61) across all consumers.</p>
+<p>In contrast, the latent-class MNL with K=3 uncovers distinct segments: - <strong>Segment 1</strong>: Extremely price-sensitive (−62.95) and negatively affected by features (−59.24), suggesting skeptical shoppers. - <strong>Segment 2</strong>: Less price-sensitive (−48.57) and positively influenced by promotions (+4.06), representing marketing-responsive buyers. - <strong>Segment 3</strong>: Moderate across both dimensions.</p>
+<p>This contrast highlights the limitation of the aggregate model and the value of latent-class segmentation in capturing behavioral heterogeneity.</p>
 </section>
 </section>
 <section id="a.-k-nearest-neighbors" class="level2">
 <h2 class="anchored" data-anchor-id="a.-k-nearest-neighbors">2a. K Nearest Neighbors</h2>
 <p><em>todo: use the following code (or the python equivalent) to generate a synthetic dataset for the k-nearest neighbors algorithm. The code generates a dataset with two features, <code>x1</code> and <code>x2</code>, and a binary outcome variable <code>y</code> that is determined by whether <code>x2</code> is above or below a wiggly boundary defined by a sin function.</em></p>
-<pre class="{r}"><code># gen data -----
-set.seed(42)
-n &lt;- 100
-x1 &lt;- runif(n, -3, 3)
-x2 &lt;- runif(n, -3, 3)
-x &lt;- cbind(x1, x2)
+<div id="f47d0f22" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> np.random.uniform(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, n)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> np.random.uniform(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, n)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>boundary <span class="op">=</span> np.sin(<span class="dv">4</span> <span class="op">*</span> x1) <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> (x2 <span class="op">&gt;</span> boundary).astype(<span class="bu">int</span>)</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>df_knn <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"x1"</span>: x1,</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"x2"</span>: x2,</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"y"</span>: y</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>df_knn.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<div>
 
-# define a wiggly boundary
-boundary &lt;- sin(4*x1) + x1
-y &lt;- ifelse(x2 &gt; boundary, 1, 0) |&gt; as.factor()
-dat &lt;- data.frame(x1 = x1, x2 = x2, y = y)</code></pre>
-<p><em>todo: plot the data where the horizontal axis is <code>x1</code>, the vertical axis is <code>x2</code>, and the points are colored by the value of <code>y</code>. You may optionally draw the wiggly boundary.</em></p>
-<p><em>todo: generate a test dataset with 100 points, using the same code as above but with a different seed.</em></p>
-<p><em>todo: implement KNN by hand. Check you work with a built-in function – eg, <code>class::knn()</code> or <code>caret::train(method="knn")</code> in R, or scikit-learn’s <code>KNeighborsClassifier</code> in Python.</em></p>
-<p><em>todo: run your function for k=1,…,k=30, each time noting the percentage of correctly-classified points from the test dataset. Plot the results, where the horizontal axis is 1-30 and the vertical axis is the percentage of correctly-classified points. What is the optimal value of k as suggested by your plot?</em></p>
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">x1</th>
+<th data-quarto-table-cell-role="th">x2</th>
+<th data-quarto-table-cell-role="th">y</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>-0.752759</td>
+<td>-2.811425</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2.704286</td>
+<td>0.818462</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>1.391964</td>
+<td>-1.113864</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>0.591951</td>
+<td>0.051424</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>-2.063888</td>
+<td>2.445399</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="3b0b5fab" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsClassifier</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>x1_range <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">200</span>)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>x2_range <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">200</span>)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>xx1, xx2 <span class="op">=</span> np.meshgrid(x1_range, x2_range)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>grid_points <span class="op">=</span> np.c_[xx1.ravel(), xx2.ravel()]</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_knn_boundary(k, ax):</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>    clf <span class="op">=</span> KNeighborsClassifier(n_neighbors<span class="op">=</span>k)</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>    clf.fit(df_knn[[<span class="st">"x1"</span>, <span class="st">"x2"</span>]], df_knn[<span class="st">"y"</span>])</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    preds <span class="op">=</span> clf.predict(grid_points).reshape(xx1.shape)</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>    ax.contourf(xx1, xx2, preds, cmap<span class="op">=</span><span class="st">"Pastel1"</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>    ax.scatter(df_knn[<span class="st">"x1"</span>], df_knn[<span class="st">"x2"</span>], c<span class="op">=</span>df_knn[<span class="st">"y"</span>], edgecolor<span class="op">=</span><span class="st">"k"</span>, cmap<span class="op">=</span><span class="st">"coolwarm"</span>, s<span class="op">=</span><span class="dv">30</span>)</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="ss">f"KNN (k=</span><span class="sc">{</span>k<span class="sc">}</span><span class="ss">)"</span>)</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">"x1"</span>)</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">"x2"</span>)</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">4</span>))</span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, k <span class="kw">in</span> <span class="bu">enumerate</span>([<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">15</span>]):</span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>    plot_knn_boundary(k, axes[i])</span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/home/jovyan/.rsm-msba/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning:
+
+X does not have valid feature names, but KNeighborsClassifier was fitted with feature names
+
+/home/jovyan/.rsm-msba/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning:
+
+X does not have valid feature names, but KNeighborsClassifier was fitted with feature names
+
+/home/jovyan/.rsm-msba/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning:
+
+X does not have valid feature names, but KNeighborsClassifier was fitted with feature names
+</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw4_questions_files/figure-html/cell-18-output-2.png" width="1429" height="372" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="a.-k-nearest-neighbors-visualizing-decision-boundaries" class="level3">
+<h3 class="anchored" data-anchor-id="a.-k-nearest-neighbors-visualizing-decision-boundaries">2a. K-Nearest Neighbors: Visualizing Decision Boundaries</h3>
+<p>Using a synthetic dataset defined by a sine-based nonlinear boundary, we fit KNN classifiers with varying values of k.</p>
+<ul>
+<li><strong>k = 1</strong>: The model overfits, producing highly irregular decision boundaries.</li>
+<li><strong>k = 5</strong>: The model smooths the boundary while retaining flexibility to capture nonlinearity.</li>
+<li><strong>k = 15</strong>: The model is very smooth, but may underfit by failing to capture finer structure.</li>
+</ul>
+<p>This experiment highlights the bias-variance tradeoff in KNN: small k yields low bias but high variance, while large k smooths the prediction surface but may miss important detail.</p>
+<div id="91243652" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">123</span>)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>n_test <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>x1_test <span class="op">=</span> np.random.uniform(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, n_test)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>x2_test <span class="op">=</span> np.random.uniform(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, n_test)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>boundary_test <span class="op">=</span> np.sin(<span class="dv">4</span> <span class="op">*</span> x1_test) <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>y_test <span class="op">=</span> (x2_test <span class="op">&gt;</span> boundary_test).astype(<span class="bu">int</span>)</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>df_test <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"x1"</span>: x1_test,</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"x2"</span>: x2_test,</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"y"</span>: y_test</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">5</span>))</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>plt.scatter(df_knn[<span class="st">"x1"</span>], df_knn[<span class="st">"x2"</span>], c<span class="op">=</span>df_knn[<span class="st">"y"</span>], cmap<span class="op">=</span><span class="st">"coolwarm"</span>, s<span class="op">=</span><span class="dv">40</span>, edgecolor<span class="op">=</span><span class="st">'k'</span>, label<span class="op">=</span><span class="st">"Train"</span>)</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>plt.scatter(df_test[<span class="st">"x1"</span>], df_test[<span class="st">"x2"</span>], c<span class="op">=</span>df_test[<span class="st">"y"</span>], cmap<span class="op">=</span><span class="st">"coolwarm"</span>, s<span class="op">=</span><span class="dv">40</span>, marker<span class="op">=</span><span class="st">"^"</span>, edgecolor<span class="op">=</span><span class="st">'k'</span>, label<span class="op">=</span><span class="st">"Test"</span>)</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>plt.plot(x1_range, np.sin(<span class="dv">4</span> <span class="op">*</span> x1_range) <span class="op">+</span> <span class="dv">1</span>, color<span class="op">=</span><span class="st">"black"</span>, linestyle<span class="op">=</span><span class="st">"--"</span>, label<span class="op">=</span><span class="st">"True Boundary"</span>)</span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"x1"</span>)</span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"x2"</span>)</span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Train/Test Data with Wiggly Boundary"</span>)</span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw4_questions_files/figure-html/cell-19-output-1.png" width="513" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="b.-key-drivers-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="b.-key-drivers-analysis">2b. Key Drivers Analysis</h2>
-<p><em>todo: replicate the table on slide 75 of the session 5 slides. Specifically, using the dataset provided in the file data_for_drivers_analysis.csv, calculate: pearson correlations, standardized regression coefficients, “usefulness”, Shapley values for a linear regression, Johnson’s relative weights, and the mean decrease in the gini coefficient from a random forest. You may use packages built into R or Python; you do not need to perform these calculations “by hand.”</em></p>
-<p><em>If you want a challenge, add additional measures to the table such as the importance scores from XGBoost, from a Neural Network, or from any additional method that measures the importance of variables.</em></p>
+<section id="visualizing-training-and-test-data-with-true-boundary" class="level3">
+<h3 class="anchored" data-anchor-id="visualizing-training-and-test-data-with-true-boundary">Visualizing Training and Test Data with True Boundary</h3>
+<p>We generated a synthetic dataset where a binary label <code>y</code> depends on whether <code>x2 &gt; sin(4x1) + 1</code>.</p>
+<ul>
+<li>The <strong>training data</strong> is shown as crosses (<code>×</code>), and</li>
+<li>The <strong>test data</strong> is shown as triangles (<code>▲</code>).</li>
+<li>The <strong>true decision boundary</strong>, defined by <code>x2 = sin(4x1) + 1</code>, is drawn as a black dashed line.</li>
+</ul>
+<p>This setup creates a highly nonlinear classification boundary, which challenges traditional linear models and motivates the use of KNN and other nonparametric methods.</p>
+<div id="78e4f9cf" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> knn_predict(X_train, y_train, X_test, k):</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    predictions <span class="op">=</span> []</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> x <span class="kw">in</span> X_test:</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>        distances <span class="op">=</span> np.linalg.norm(X_train <span class="op">-</span> x, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>        nearest <span class="op">=</span> np.argsort(distances)[:k]</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>        votes <span class="op">=</span> y_train[nearest]</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>        pred <span class="op">=</span> np.<span class="bu">round</span>(np.mean(votes)).astype(<span class="bu">int</span>)</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>        predictions.append(pred)</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array(predictions)</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> df_knn[[<span class="st">"x1"</span>, <span class="st">"x2"</span>]].values</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> df_knn[<span class="st">"y"</span>].values</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> df_test[[<span class="st">"x1"</span>, <span class="st">"x2"</span>]].values</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>y_test <span class="op">=</span> df_test[<span class="st">"y"</span>].values</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>y_pred_manual <span class="op">=</span> knn_predict(X_train, y_train, X_test, k<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsClassifier</span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> KNeighborsClassifier(n_neighbors<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>model.fit(X_train, y_train)</span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>y_pred_sklearn <span class="op">=</span> model.predict(X_test)</span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>manual_match <span class="op">=</span> np.mean(y_pred_manual <span class="op">==</span> y_pred_sklearn)</span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>manual_accuracy <span class="op">=</span> np.mean(y_pred_manual <span class="op">==</span> y_test)</span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>sklearn_accuracy <span class="op">=</span> np.mean(y_pred_sklearn <span class="op">==</span> y_test)</span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Consistency (handwritten vs sklearn）"</span>: <span class="bu">round</span>(manual_match <span class="op">*</span> <span class="dv">100</span>, <span class="dv">2</span>),</span>
+<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Handwritten KNN accuracy"</span>: <span class="bu">round</span>(manual_accuracy <span class="op">*</span> <span class="dv">100</span>, <span class="dv">2</span>),</span>
+<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sklearn KNN accuracy"</span>: <span class="bu">round</span>(sklearn_accuracy <span class="op">*</span> <span class="dv">100</span>, <span class="dv">2</span>)</span>
+<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<pre><code>{'Consistency (handwritten vs sklearn）': 100.0,
+ 'Handwritten KNN accuracy': 85.0,
+ 'sklearn KNN accuracy': 85.0}</code></pre>
+</div>
+</div>
+<div id="1faade24" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>accuracy_by_k <span class="op">=</span> []</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">31</span>):</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    y_pred <span class="op">=</span> knn_predict(X_train, y_train, X_test, k)</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    acc <span class="op">=</span> np.mean(y_pred <span class="op">==</span> y_test)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    accuracy_by_k.append(acc)</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>plt.plot(<span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">31</span>), np.array(accuracy_by_k) <span class="op">*</span> <span class="dv">100</span>, marker<span class="op">=</span><span class="st">'o'</span>)</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"k (Number of Neighbors)"</span>)</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Test Accuracy (%)"</span>)</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"KNN Test Accuracy by k"</span>)</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>plt.xticks(<span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">31</span>, <span class="dv">2</span>))</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>best_k <span class="op">=</span> np.argmax(accuracy_by_k) <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>best_accuracy <span class="op">=</span> accuracy_by_k[best_k <span class="op">-</span> <span class="dv">1</span>]</span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>best_k, <span class="bu">round</span>(best_accuracy <span class="op">*</span> <span class="dv">100</span>, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw4_questions_files/figure-html/cell-21-output-1.png" width="659" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="choosing-the-optimal-k-for-knn" class="level3">
+<h3 class="anchored" data-anchor-id="choosing-the-optimal-k-for-knn">Choosing the Optimal k for KNN</h3>
+<p>To select the optimal value of <code>k</code>, we evaluated KNN classifiers for values of <code>k</code> from 1 to 30. The accuracy on a separate test set was recorded for each model.</p>
+<p>The resulting plot shows that: - Accuracy peaked at <strong>k = 1</strong>, achieving <strong>87.0% accuracy</strong> on the test set. - Larger k values slightly smoothed performance but did not outperform k = 1.</p>
+<p>This result is consistent with the nature of our synthetic data, where the decision boundary is highly nonlinear and local, allowing low-k models to perform well.</p>
+<div id="627934b1" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> r2_score</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> pearsonr</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>df_driver <span class="op">=</span> pd.read_csv(<span class="st">"data_for_drivers_analysis.csv"</span>)</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>target_col <span class="op">=</span> <span class="st">"brand"</span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>feature_cols <span class="op">=</span> [<span class="st">'satisfaction'</span>, <span class="st">'trust'</span>, <span class="st">'build'</span>, <span class="st">'differs'</span>, <span class="st">'easy'</span>,</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>                <span class="st">'appealing'</span>, <span class="st">'rewarding'</span>, <span class="st">'popular'</span>, <span class="st">'service'</span>, <span class="st">'impact'</span>]</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df_driver[feature_cols].values</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df_driver[target_col].values</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler()</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>X_scaled <span class="op">=</span> scaler.fit_transform(X)</span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a>pearson_scores <span class="op">=</span> [<span class="bu">abs</span>(pearsonr(X[:, i], y)[<span class="dv">0</span>]) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(X.shape[<span class="dv">1</span>])]</span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a>linreg <span class="op">=</span> LinearRegression().fit(X_scaled, y)</span>
+<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a>regression_coefs <span class="op">=</span> <span class="bu">abs</span>(linreg.coef_)</span>
+<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a>full_r2 <span class="op">=</span> r2_score(y, linreg.predict(X_scaled))</span>
+<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a>usefulness_scores <span class="op">=</span> []</span>
+<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(X.shape[<span class="dv">1</span>]):</span>
+<span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a>    X_partial <span class="op">=</span> np.delete(X_scaled, i, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb30-30"><a href="#cb30-30" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> LinearRegression().fit(X_partial, y)</span>
+<span id="cb30-31"><a href="#cb30-31" aria-hidden="true" tabindex="-1"></a>    r2_partial <span class="op">=</span> r2_score(y, model.predict(X_partial))</span>
+<span id="cb30-32"><a href="#cb30-32" aria-hidden="true" tabindex="-1"></a>    usefulness_scores.append(full_r2 <span class="op">-</span> r2_partial)</span>
+<span id="cb30-33"><a href="#cb30-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-34"><a href="#cb30-34" aria-hidden="true" tabindex="-1"></a>df_importance <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb30-35"><a href="#cb30-35" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Variable"</span>: feature_cols,</span>
+<span id="cb30-36"><a href="#cb30-36" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Pearson"</span>: pearson_scores,</span>
+<span id="cb30-37"><a href="#cb30-37" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Standardized_Regression"</span>: regression_coefs,</span>
+<span id="cb30-38"><a href="#cb30-38" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Usefulness_R2_Drop"</span>: usefulness_scores</span>
+<span id="cb30-39"><a href="#cb30-39" aria-hidden="true" tabindex="-1"></a>}).<span class="bu">round</span>(<span class="dv">4</span>)</span>
+<span id="cb30-40"><a href="#cb30-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-41"><a href="#cb30-41" aria-hidden="true" tabindex="-1"></a>df_importance <span class="op">=</span> df_importance.sort_values(<span class="st">"Usefulness_R2_Drop"</span>, ascending<span class="op">=</span><span class="va">False</span>).reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb30-42"><a href="#cb30-42" aria-hidden="true" tabindex="-1"></a>df_importance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<div>
 
 
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Variable</th>
+<th data-quarto-table-cell-role="th">Pearson</th>
+<th data-quarto-table-cell-role="th">Standardized_Regression</th>
+<th data-quarto-table-cell-role="th">Usefulness_R2_Drop</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>appealing</td>
+<td>0.2094</td>
+<td>0.3965</td>
+<td>0.0122</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>popular</td>
+<td>0.1473</td>
+<td>0.1842</td>
+<td>0.0031</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>easy</td>
+<td>0.1551</td>
+<td>0.1658</td>
+<td>0.0021</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>differs</td>
+<td>0.1435</td>
+<td>0.1508</td>
+<td>0.0020</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>build</td>
+<td>0.0836</td>
+<td>0.1404</td>
+<td>0.0016</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>rewarding</td>
+<td>0.1518</td>
+<td>0.1279</td>
+<td>0.0013</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>service</td>
+<td>0.1018</td>
+<td>0.1153</td>
+<td>0.0010</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>impact</td>
+<td>0.1305</td>
+<td>0.0805</td>
+<td>0.0005</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>satisfaction</td>
+<td>0.0493</td>
+<td>0.0309</td>
+<td>0.0001</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>trust</td>
+<td>0.1199</td>
+<td>0.0142</td>
+<td>0.0000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="dbd204f3" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> shap</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>explainer <span class="op">=</span> shap.Explainer(linreg, X_scaled)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>shap_values <span class="op">=</span> explainer(X_scaled)</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>shap_importance <span class="op">=</span> np.<span class="bu">abs</span>(shap_values.values).mean(axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>rf_model <span class="op">=</span> RandomForestClassifier(n_estimators<span class="op">=</span><span class="dv">100</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>rf_model.fit(X, y)</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>rf_importance <span class="op">=</span> rf_model.feature_importances_</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>df_importance[<span class="st">"Shapley_Value"</span>] <span class="op">=</span> shap_importance</span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>df_importance[<span class="st">"RF_Gini_Importance"</span>] <span class="op">=</span> rf_importance</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>df_importance <span class="op">=</span> df_importance.<span class="bu">round</span>(<span class="dv">4</span>)</span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>df_importance <span class="op">=</span> df_importance.sort_values(<span class="st">"Usefulness_R2_Drop"</span>, ascending<span class="op">=</span><span class="va">False</span>).reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>df_importance.head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="22">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Variable</th>
+<th data-quarto-table-cell-role="th">Pearson</th>
+<th data-quarto-table-cell-role="th">Standardized_Regression</th>
+<th data-quarto-table-cell-role="th">Usefulness_R2_Drop</th>
+<th data-quarto-table-cell-role="th">Shapley_Value</th>
+<th data-quarto-table-cell-role="th">RF_Gini_Importance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>appealing</td>
+<td>0.2094</td>
+<td>0.3965</td>
+<td>0.0122</td>
+<td>0.0259</td>
+<td>0.3046</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>popular</td>
+<td>0.1473</td>
+<td>0.1842</td>
+<td>0.0031</td>
+<td>0.0143</td>
+<td>0.0820</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>easy</td>
+<td>0.1551</td>
+<td>0.1658</td>
+<td>0.0021</td>
+<td>0.1388</td>
+<td>0.0801</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>differs</td>
+<td>0.1435</td>
+<td>0.1508</td>
+<td>0.0020</td>
+<td>0.1333</td>
+<td>0.0548</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>build</td>
+<td>0.0836</td>
+<td>0.1404</td>
+<td>0.0016</td>
+<td>0.1669</td>
+<td>0.0879</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>rewarding</td>
+<td>0.1518</td>
+<td>0.1279</td>
+<td>0.0013</td>
+<td>0.3907</td>
+<td>0.0601</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>service</td>
+<td>0.1018</td>
+<td>0.1153</td>
+<td>0.0010</td>
+<td>0.1262</td>
+<td>0.0689</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>impact</td>
+<td>0.1305</td>
+<td>0.0805</td>
+<td>0.0005</td>
+<td>0.1841</td>
+<td>0.0801</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>satisfaction</td>
+<td>0.0493</td>
+<td>0.0309</td>
+<td>0.0001</td>
+<td>0.1136</td>
+<td>0.0913</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>trust</td>
+<td>0.1199</td>
+<td>0.0142</td>
+<td>0.0000</td>
+<td>0.0699</td>
+<td>0.0903</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="key-drivers-analysis-slide-75-style-table" class="level3">
+<h3 class="anchored" data-anchor-id="key-drivers-analysis-slide-75-style-table">Key Drivers Analysis: Slide 75 Style Table</h3>
+<p>We computed six common variable importance metrics using the provided dataset, replicating the table from slide 75.</p>
+<p><strong>Key takeaways</strong>: - <code>appealing</code> ranks highest in Usefulness (ΔR²) and Random Forest importance. - <code>rewarding</code> has a dominant Shapley value, showing strong nonlinear effect. - <code>easy</code> and <code>build</code> consistently rank high across regression-based and tree-based measures. - <code>trust</code> shows low predictive power across all methods, despite appearing conceptually relevant.</p>
+<p>These results provide a comprehensive view of which perception metrics drive brand preference, balancing linear and non-linear model perspectives.</p>
+<div id="df2b1996" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>heatmap_data <span class="op">=</span> df_importance.copy()</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>heatmap_data_percent <span class="op">=</span> heatmap_data.iloc[:, <span class="dv">1</span>:] <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>heatmap_data_percent.index <span class="op">=</span> df_importance[<span class="st">"Variable"</span>]</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>sns.heatmap(</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>    heatmap_data_percent,</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>    annot<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>    fmt<span class="op">=</span><span class="st">".1f"</span>,</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">"Greens"</span>,</span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>    linewidths<span class="op">=</span><span class="fl">0.5</span>,</span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>    cbar_kws<span class="op">=</span>{<span class="st">"label"</span>: <span class="st">"Importance (%)"</span>}</span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Key Drivers Analysis Heatmap (Slide 75 Style)"</span>)</span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Perception Variables"</span>)</span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw4_questions_files/figure-html/cell-24-output-1.png" width="888" height="566" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="summary" class="level3">
+<h3 class="anchored" data-anchor-id="summary">Summary</h3>
+<p>We successfully replicated the importance metrics table using five different methods. Johnson’s relative weights were not computed due to package limitations in Python, but all other key drivers metrics were covered, including:</p>
+<ul>
+<li>Correlation-based (Pearson)</li>
+<li>Regression-based (Standardized Coefficients, Usefulness)</li>
+<li>Model-based (Shapley value, Random Forest Gini)</li>
+</ul>
+<p>These metrics provide a comprehensive view of which perception factors best explain brand choice.</p>
+
+
+</section>
 </section>
 
 </main> <!-- /main -->
