@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Ethan An">
-<meta name="dcterms.date" content="2025-05-19">
+<meta name="dcterms.date" content="2025-06-05">
 
-<title>Multinomial Logit Model – Home</title>
+<title>Homework 3: Multinomial Logit Model – Home</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -206,7 +206,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Multinomial Logit Model</h1>
+<h1 class="title">Homework 3: Multinomial Logit Model</h1>
 </div>
 
 
@@ -223,7 +223,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 19, 2025</p>
+      <p class="date">June 5, 2025</p>
     </div>
   </div>
   
@@ -347,7 +347,7 @@ rm(list=setdiff(ls(), "conjoint_data"))</code></pre>
 <section id="preparing-the-data-for-estimation" class="level2">
 <h2 class="anchored" data-anchor-id="preparing-the-data-for-estimation">3. Preparing the Data for Estimation</h2>
 <p>The “hard part” of the MNL likelihood function is organizing the data, as we need to keep track of 3 dimensions (consumer <span class="math inline">\(i\)</span>, covariate <span class="math inline">\(k\)</span>, and product <span class="math inline">\(j\)</span>) instead of the typical 2 dimensions for cross-sectional regression models (consumer <span class="math inline">\(i\)</span> and covariate <span class="math inline">\(k\)</span>). The fact that each task for each respondent has the same number of alternatives (3) helps. In addition, we need to convert the categorical variables for brand and ads into binary variables.</p>
-<div id="ca6b8dfa" class="cell" data-execution_count="1">
+<div id="85fbda32" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -446,7 +446,7 @@ rm(list=setdiff(ls(), "conjoint_data"))</code></pre>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    chosen_utilities <span class="op">=</span> Xb_flat[y <span class="op">==</span> <span class="dv">1</span>]</span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>np.<span class="bu">sum</span>(chosen_utilities <span class="op">-</span> log_denominator)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="d49ffca3" class="cell" data-execution_count="3">
+<div id="84d6d23a" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> minimize</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -561,7 +561,7 @@ rm(list=setdiff(ls(), "conjoint_data"))</code></pre>
 <span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
 <span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><img src="hw3_questions_files/figure-html/cell-6-output-1.png" width="1141" height="372"></p>
-<div id="5fa00b11" class="cell" data-execution_count="6">
+<div id="ddb97be2" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>post_means <span class="op">=</span> samples.mean(axis<span class="op">=</span><span class="dv">0</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>post_stds <span class="op">=</span> samples.std(axis<span class="op">=</span><span class="dv">0</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>ci_lower <span class="op">=</span> np.percentile(samples, <span class="fl">2.5</span>, axis<span class="op">=</span><span class="dv">0</span>)</span>
