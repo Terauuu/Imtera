@@ -214,7 +214,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div id="3a803a3f" class="cell" data-execution_count="1">
+<div id="a3116227" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.special <span class="im">import</span> softmax</span>
@@ -236,7 +236,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> brand, col <span class="kw">in</span> <span class="bu">zip</span>(brands, purchase_cols):</span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    df[<span class="ss">f'choice_</span><span class="sc">{</span>brand<span class="sc">}</span><span class="ss">'</span>] <span class="op">=</span> df[col] <span class="op">/</span> df[<span class="st">'total'</span>] </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="98824bf9" class="cell" data-execution_count="2">
+<div id="f37897ef" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>X_price <span class="op">=</span> df[price_cols].values</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>Y_share <span class="op">=</span> df[[<span class="ss">f'choice_</span><span class="sc">{</span>b<span class="sc">}</span><span class="ss">'</span> <span class="cf">for</span> b <span class="kw">in</span> brands]].values</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -265,7 +265,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>        log_likelihood <span class="op">+=</span> max_log <span class="op">+</span> np.log(np.<span class="bu">sum</span>(np.exp(np.array(segment_logprobs) <span class="op">-</span> max_log)))</span>
 <span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>log_likelihood</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="04ed7ece" class="cell" data-execution_count="3">
+<div id="a7b0b1a6" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>init_params <span class="op">=</span> np.random.normal(loc<span class="op">=</span><span class="fl">0.0</span>, scale<span class="op">=</span><span class="fl">0.1</span>, size<span class="op">=</span><span class="dv">16</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -286,7 +286,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 Final negative log-likelihood： 44.71326072156327</code></pre>
 </div>
 </div>
-<div id="784a1cea" class="cell" data-execution_count="4">
+<div id="5f384460" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">5</span>))</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>sns.barplot(data<span class="op">=</span>results, x<span class="op">=</span><span class="st">"Brand"</span>, y<span class="op">=</span><span class="st">"PriceCoef"</span>, hue<span class="op">=</span><span class="st">"Segment"</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Estimated Price Sensitivity by Segment"</span>)</span>
@@ -305,7 +305,7 @@ Final negative log-likelihood： 44.71326072156327</code></pre>
 <p>We estimated a simplified latent-class multinomial logit model using a 50-observation subsample of yogurt choice data to improve computational tractability during development. The model assumes two hidden consumer segments with differing price sensitivities across four yogurt brands.</p>
 <p>As shown in the barplot above: - Segment 1 and Segment 2 both exhibit strong negative price sensitivity for Brand A, suggesting a general aversion to high prices for that brand. - Sensitivity toward Brands B, C, and D is weaker and more similar across segments. - The segment structure captures heterogeneity in consumer valuation of price, in line with Kamakura &amp; Russell (1989)’s approach to market segmentation.</p>
 <p>This demonstration highlights the interpretability and flexibility of latent-class choice models, even under reduced sample conditions.</p>
-<div id="a77a7b7c" class="cell" data-execution_count="5">
+<div id="e5236d5f" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"data_for_drivers_analysis.csv"</span>)</span>
@@ -318,7 +318,7 @@ Index(['brand', 'id', 'satisfaction', 'trust', 'build', 'differs', 'easy',
        'appealing', 'rewarding', 'popular', 'service', 'impact'],
       dtype='object')</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="28">
 <div>
 
 
@@ -422,7 +422,7 @@ Index(['brand', 'id', 'satisfaction', 'trust', 'build', 'differs', 'easy',
 </div>
 </div>
 </div>
-<div id="4dada28c" class="cell" data-execution_count="6">
+<div id="1e570036" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
@@ -455,7 +455,7 @@ Index(['brand', 'id', 'satisfaction', 'trust', 'build', 'differs', 'easy',
 <span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
 <span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_74725/3543069821.py:26: FutureWarning:
+<pre><code>/tmp/ipykernel_78631/3543069821.py:26: FutureWarning:
 
 
 
@@ -481,7 +481,7 @@ Passing `palette` without assigning `hue` is deprecated and will be removed in v
 </section>
 <section id="a.-k-means" class="level2">
 <h2 class="anchored" data-anchor-id="a.-k-means">1a. K-Means</h2>
-<div id="b70323bb" class="cell" data-execution_count="7">
+<div id="327548a4" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>penguins_df <span class="op">=</span> pd.read_csv(<span class="st">"palmer_penguins.csv"</span>)</span>
@@ -504,7 +504,7 @@ Data columns (total 8 columns):
 dtypes: float64(2), int64(3), object(3)
 memory usage: 20.9+ KB</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="7">
+<div class="cell-output cell-output-display" data-execution_count="30">
 <pre><code>(None,
    species     island  bill_length_mm  bill_depth_mm  flipper_length_mm  \
  0  Adelie  Torgersen            39.1           18.7                181   
@@ -521,7 +521,7 @@ memory usage: 20.9+ KB</code></pre>
  4         3650    male  2007  )</code></pre>
 </div>
 </div>
-<div id="8d098b59" class="cell" data-execution_count="8">
+<div id="ffdd5c48" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -578,7 +578,7 @@ memory usage: 20.9+ KB</code></pre>
 <p>To visualize how the algorithm converges, we plotted the clustering result after each iteration. The figure above shows how the centroid positions stabilize over time and how clusters separate clearly.</p>
 <p>Despite being unsupervised, the resulting clusters align well with species differentiation, which suggests that physical characteristics such as bill and flipper size are effective for grouping penguins.</p>
 <p>This implementation also serves as a basis to compare against scikit-learn’s built-in <code>KMeans</code> function.</p>
-<div id="cfdc29de" class="cell" data-execution_count="9">
+<div id="26de130c" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> silhouette_score</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -632,7 +632,7 @@ memory usage: 20.9+ KB</code></pre>
 </section>
 <section id="b.-latent-class-mnl" class="level2">
 <h2 class="anchored" data-anchor-id="b.-latent-class-mnl">1b. Latent-Class MNL</h2>
-<div id="220069a8" class="cell" data-execution_count="10">
+<div id="218d8173" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"yogurt_data.csv"</span>)</span>
@@ -665,7 +665,7 @@ memory usage: 20.9+ KB</code></pre>
 <span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>long_df[<span class="st">'chosen'</span>] <span class="op">=</span> (long_df[<span class="st">'choice'</span>] <span class="op">&gt;</span> <span class="dv">0</span>).astype(<span class="bu">int</span>)</span>
 <span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>long_df.head(<span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="10">
+<div class="cell-output cell-output-display" data-execution_count="33">
 <div>
 
 
@@ -809,7 +809,7 @@ memory usage: 20.9+ KB</code></pre>
 </div>
 </div>
 </div>
-<div id="411abc19" class="cell" data-execution_count="11">
+<div id="f0b3c03f" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.special <span class="im">import</span> softmax</span>
@@ -905,7 +905,7 @@ memory usage: 20.9+ KB</code></pre>
 </ul>
 <p>For example: - The effect of a feature promotion increases utility by +4.06 in Segment 2 but decreases utility in Segment 1. - All price coefficients are negative, as expected, with Segment 1 generally more price-sensitive (−62.95 vs −48.57).</p>
 <p>These results align with the notion of heterogeneous consumer behavior and support latent class segmentation in yogurt product choice.</p>
-<div id="63a9fc49" class="cell" data-execution_count="12">
+<div id="7ca75c82" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>subset_ids <span class="op">=</span> np.random.choice(long_df[<span class="st">"id"</span>].unique(), size<span class="op">=</span><span class="dv">50</span>, replace<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>long_df_small <span class="op">=</span> long_df[long_df[<span class="st">"id"</span>].isin(subset_ids)].copy()</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -960,7 +960,7 @@ memory usage: 20.9+ KB</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>Whether the standard MNL converges： True</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="12">
+<div class="cell-output cell-output-display" data-execution_count="35">
 <div>
 
 
@@ -1014,7 +1014,7 @@ memory usage: 20.9+ KB</code></pre>
 </div>
 </div>
 </div>
-<div id="157bd654" class="cell" data-execution_count="13">
+<div id="42863fb0" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.special <span class="im">import</span> softmax</span>
@@ -1094,7 +1094,7 @@ memory usage: 20.9+ KB</code></pre>
 <span id="cb20-77"><a href="#cb20-77" aria-hidden="true" tabindex="-1"></a>result_std.insert(<span class="dv">0</span>, <span class="st">"Model"</span>, <span class="st">"Standard MNL"</span>)</span>
 <span id="cb20-78"><a href="#cb20-78" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-79"><a href="#cb20-79" aria-hidden="true" tabindex="-1"></a>result_std.<span class="bu">round</span>(<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="13">
+<div class="cell-output cell-output-display" data-execution_count="36">
 <div>
 
 
@@ -1148,7 +1148,7 @@ memory usage: 20.9+ KB</code></pre>
 </div>
 </div>
 </div>
-<div id="ab8d8c55" class="cell" data-execution_count="14">
+<div id="15604331" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>results_summary <span class="op">=</span> []</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"yogurt_data.csv"</span>)</span>
@@ -1247,7 +1247,7 @@ memory usage: 20.9+ KB</code></pre>
 <span id="cb21-96"><a href="#cb21-96" aria-hidden="true" tabindex="-1"></a>results_df.sort_values(<span class="st">"K"</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb21-97"><a href="#cb21-97" aria-hidden="true" tabindex="-1"></a>results_df.reset_index(drop<span class="op">=</span><span class="va">True</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb21-98"><a href="#cb21-98" aria-hidden="true" tabindex="-1"></a>results_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="14">
+<div class="cell-output cell-output-display" data-execution_count="37">
 <div>
 
 
@@ -1330,7 +1330,7 @@ memory usage: 20.9+ KB</code></pre>
 </ul></li>
 </ul>
 <p>This comparison highlights the value of latent-class models in uncovering hidden preference patterns that aggregate models cannot detect.</p>
-<div id="e859b221" class="cell" data-execution_count="15">
+<div id="ae9712b4" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>standard_result <span class="op">=</span> pd.DataFrame({</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Model"</span>: [<span class="st">"Standard MNL"</span>] <span class="op">*</span> <span class="dv">4</span>,</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Segment"</span>: [<span class="st">"All"</span>] <span class="op">*</span> <span class="dv">4</span>,</span>
@@ -1352,7 +1352,7 @@ memory usage: 20.9+ KB</code></pre>
 <span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>combined <span class="op">=</span> pd.concat([standard_result, latent_k3_result], ignore_index<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>combined <span class="op">=</span> combined[[<span class="st">"Model"</span>, <span class="st">"Segment"</span>, <span class="st">"Brand"</span>, <span class="st">"Intercept"</span>, <span class="st">"Coef_Price"</span>, <span class="st">"Coef_Feature"</span>]]</span>
 <span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>combined.<span class="bu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="15">
+<div class="cell-output cell-output-display" data-execution_count="38">
 <div>
 
 
@@ -1530,7 +1530,7 @@ memory usage: 20.9+ KB</code></pre>
 <section id="a.-k-nearest-neighbors" class="level2">
 <h2 class="anchored" data-anchor-id="a.-k-nearest-neighbors">2a. K Nearest Neighbors</h2>
 <p><em>todo: use the following code (or the python equivalent) to generate a synthetic dataset for the k-nearest neighbors algorithm. The code generates a dataset with two features, <code>x1</code> and <code>x2</code>, and a binary outcome variable <code>y</code> that is determined by whether <code>x2</code> is above or below a wiggly boundary defined by a sin function.</em></p>
-<div id="f47d0f22" class="cell" data-execution_count="16">
+<div id="cac5c431" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1550,7 +1550,7 @@ memory usage: 20.9+ KB</code></pre>
 <span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>})</span>
 <span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>df_knn.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="16">
+<div class="cell-output cell-output-display" data-execution_count="39">
 <div>
 
 
@@ -1600,7 +1600,7 @@ memory usage: 20.9+ KB</code></pre>
 </div>
 </div>
 </div>
-<div id="3b0b5fab" class="cell" data-execution_count="17">
+<div id="1c243e4f" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsClassifier</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1657,7 +1657,7 @@ X does not have valid feature names, but KNeighborsClassifier was fitted with fe
 <li><strong>k = 15</strong>: The model is very smooth, but may underfit by failing to capture finer structure.</li>
 </ul>
 <p>This experiment highlights the bias-variance tradeoff in KNN: small k yields low bias but high variance, while large k smooths the prediction surface but may miss important detail.</p>
-<div id="91243652" class="cell" data-execution_count="18">
+<div id="acfc5cc3" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">123</span>)</span>
@@ -1701,7 +1701,7 @@ X does not have valid feature names, but KNeighborsClassifier was fitted with fe
 <li>The <strong>true decision boundary</strong>, defined by <code>x2 = sin(4x1) + 1</code>, is drawn as a black dashed line.</li>
 </ul>
 <p>This setup creates a highly nonlinear classification boundary, which challenges traditional linear models and motivates the use of KNN and other nonparametric methods.</p>
-<div id="78e4f9cf" class="cell" data-execution_count="19">
+<div id="0942fa19" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> knn_predict(X_train, y_train, X_test, k):</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    predictions <span class="op">=</span> []</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> x <span class="kw">in</span> X_test:</span>
@@ -1733,13 +1733,13 @@ X does not have valid feature names, but KNeighborsClassifier was fitted with fe
 <span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Handwritten KNN accuracy"</span>: <span class="bu">round</span>(manual_accuracy <span class="op">*</span> <span class="dv">100</span>, <span class="dv">2</span>),</span>
 <span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sklearn KNN accuracy"</span>: <span class="bu">round</span>(sklearn_accuracy <span class="op">*</span> <span class="dv">100</span>, <span class="dv">2</span>)</span>
 <span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="19">
+<div class="cell-output cell-output-display" data-execution_count="42">
 <pre><code>{'Consistency (handwritten vs sklearn）': 100.0,
  'Handwritten KNN accuracy': 85.0,
  'sklearn KNN accuracy': 85.0}</code></pre>
 </div>
 </div>
-<div id="1faade24" class="cell" data-execution_count="20">
+<div id="c0c90d93" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>accuracy_by_k <span class="op">=</span> []</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">31</span>):</span>
@@ -1774,7 +1774,7 @@ X does not have valid feature names, but KNeighborsClassifier was fitted with fe
 <p>To select the optimal value of <code>k</code>, we evaluated KNN classifiers for values of <code>k</code> from 1 to 30. The accuracy on a separate test set was recorded for each model.</p>
 <p>The resulting plot shows that: - Accuracy peaked at <strong>k = 1</strong>, achieving <strong>87.0% accuracy</strong> on the test set. - Larger k values slightly smoothed performance but did not outperform k = 1.</p>
 <p>This result is consistent with the nature of our synthetic data, where the decision boundary is highly nonlinear and local, allowing low-k models to perform well.</p>
-<div id="627934b1" class="cell" data-execution_count="21">
+<div id="005371c3" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
@@ -1817,7 +1817,7 @@ X does not have valid feature names, but KNeighborsClassifier was fitted with fe
 <span id="cb30-40"><a href="#cb30-40" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-41"><a href="#cb30-41" aria-hidden="true" tabindex="-1"></a>df_importance <span class="op">=</span> df_importance.sort_values(<span class="st">"Usefulness_R2_Drop"</span>, ascending<span class="op">=</span><span class="va">False</span>).reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb30-42"><a href="#cb30-42" aria-hidden="true" tabindex="-1"></a>df_importance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="21">
+<div class="cell-output cell-output-display" data-execution_count="44">
 <div>
 
 
@@ -1908,7 +1908,7 @@ X does not have valid feature names, but KNeighborsClassifier was fitted with fe
 </div>
 </div>
 </div>
-<div id="dbd204f3" class="cell" data-execution_count="22">
+<div id="489e75c1" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> shap</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>explainer <span class="op">=</span> shap.Explainer(linreg, X_scaled)</span>
@@ -1928,7 +1928,7 @@ X does not have valid feature names, but KNeighborsClassifier was fitted with fe
 <span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>df_importance <span class="op">=</span> df_importance.sort_values(<span class="st">"Usefulness_R2_Drop"</span>, ascending<span class="op">=</span><span class="va">False</span>).reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>df_importance.head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="22">
+<div class="cell-output cell-output-display" data-execution_count="45">
 <div>
 
 
@@ -2047,7 +2047,7 @@ X does not have valid feature names, but KNeighborsClassifier was fitted with fe
 <p>We computed six common variable importance metrics using the provided dataset, replicating the table from slide 75.</p>
 <p><strong>Key takeaways</strong>: - <code>appealing</code> ranks highest in Usefulness (ΔR²) and Random Forest importance. - <code>rewarding</code> has a dominant Shapley value, showing strong nonlinear effect. - <code>easy</code> and <code>build</code> consistently rank high across regression-based and tree-based measures. - <code>trust</code> shows low predictive power across all methods, despite appearing conceptually relevant.</p>
 <p>These results provide a comprehensive view of which perception metrics drive brand preference, balancing linear and non-linear model perspectives.</p>
-<div id="df2b1996" class="cell" data-execution_count="23">
+<div id="74c9e39b" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
