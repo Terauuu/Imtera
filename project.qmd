@@ -1,7 +1,7 @@
 ---
 title: "Linglu's Project"
 listing:
-  contents: [hw1/hw1_questions.qmd, hw2/hw2_questions.qmd, hw3/hw3_questions.qmd, hw4/hw4_questions.qmd]
+  contents: [HW1/Summary-copy.qmd]
   type: grid
   sort: "date desc"
   categories: false

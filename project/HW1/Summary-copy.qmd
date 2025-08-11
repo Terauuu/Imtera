@@ -1,0 +1,290 @@
+---
+title: "Project Summary"
+author: "Amy Ji(6009476), Tera Li(7545403), Brandon Su(5807961)"
+date: "2024-06-11"
+format: html
+categories:: [project]
+---
+# 1 Introduction and Data Description
+Our project aims to predict students' performances in mathematics in Portugal using the "Student Performance" dataset from the UCI Machine Learning Repository:  [https://archive.ics.uci.edu/dataset/320/student+performance](https://archive.ics.uci.edu/dataset/320/student+performance). This dataset includes 395 students' grades and various other attributes from two schools in Portugal: Gabriel Pereira or Mousinho da Silveira. We have selected 13 attributes that we considered the most relevant for predicting the final term mathematics performance $G3$. Here are the descriptions of each variables. 
+
+```{r, echo=F, warning=F, message=F}
+# some useful libraries
+library(readr)
+library(dplyr)
+library(knitr)
+library(glmnet)
+library(MASS)
+library(tidyr)
+library(caret)
+library(ggplot2)
+library(car)
+library(boot)
+library(caret)
+library(patchwork)
+library(gridExtra)
+```
+
+```{r, echo=F, warning=F, message=F}
+# load our data here
+mathdata <- read.csv("/Users/Tera/Desktop/PSTAT/126/mathdata.csv")
+```
+
+```{r, echo=F, warning=F, message=F}
+# create a table include all variables description
+variables <- data.frame(
+  Variable = c("PStatus", "Mjob", "Fjob", "Address", "Reason", "Age", "Study_time", "Family_rel", "Walc", "Health", "Absences", "G1", "G2", "G3(Response)"),
+  Description = c(
+    "Parent's cohabitation status (T - living together or A - apart)",
+    "Mother's job, civil services, at home or other",
+    "Father's job, civil services, at home or other",
+    "Student's home address type (U - urban or R - rural)",
+    "Reason to choose this school",
+    "Student's age",
+    "Weekly study time: 1 - <2 hours, 2 - 2 to 5 hours, 3 - 5 to 10 hours, or 4 - >10 hours",
+    "Quality of family relationships, from 1 - very bad to 5 - excellent",
+    "Weekend alcohol consumption, from 1 - very low to 5 - very high",
+    "Current health status, from 1 - very bad to 5 - very good",
+    "Number of school absences",
+    "First term grade",
+    "Second term grade",
+    "Final term grade"
+  )
+)
+kable(variables, col.names = c("Variable", "Description"), caption = "Description of Variables")
+```
+
+Now, we are going to apply several models to our data. 
+
+# 2 Simple Linear Model
+
+\textbf{\large Assumptions of Linear Regression} \
+\textbf{Linearity:} The relationship between the amount of absences and the G3(final quarter grade) should be linear. \
+\textbf{Independence:} Each student's amount of absences and $G3$ should be independent of another's. \
+\textbf{Homoscedasticity:} The variance of residuals should be consistent across all levels of absences. \
+\textbf{Normality of Residuals:} The residuals of the model should approximately follow a normal distribution. \
+\textbf{No Multicollinearity:} Since only one predictor (absences) is considered in relation to $G3$ in our model, multicollinearity is not an issue.
+
+Our \textbf{simple linear model} is:
+
+$$\large G3 \sim \beta_0 + \beta_1 \text{logAbsences}_i  + \varepsilon_i$$
+$\beta_0$: The intercept term, it represents the value of G3 when log(Absences) = 0 \newline
+$\beta_1$: The coefficient of log(Absences) \newline
+$\varepsilon$: The error term represents the difference between the observed value of $G3$ and the value predicted by the regression line.
+
+First, let us exhibit the scatterplot of G3 and logAbsences. 
+```{r, echo=F, warning=F, message=F, fig.width=8, fig.height=3, fig.align='center'}
+mathdata <- mathdata %>%
+  mutate(logAbsences = log(Absences + 1))
+
+ggplot(mathdata, aes(x=logAbsences, y=G3)) + 
+  geom_point(alpha=0.4) + 
+  geom_smooth(method = "lm", color = "blue", se = FALSE) +  
+  theme_minimal() +
+  labs(title = "Scatterplot of G3 and logAbsences", x = "logAbsences", y = "G3") +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+```{r, echo=F, warning=F, message=F, fig.width=8, fig.height=4}
+# Fit the simple linear regression model and compute confidence interval for beta_1 (logAbsences)
+slrmodel <- lm(G3 ~ logAbsences, data = mathdata)
+summary(slrmodel)
+```
+From the p-value, we can see that both intercept and logAbsences exhibit significance for prediction, and the $R^2$ is not so high, we may assume that one predictor is not enough for our model to predict the G3 
+
+
+```{r, echo=F, warning=F, message=F, fig.width=8, fig.height=4}
+par(mfrow = c(1,2))
+# Predict the individual response with confidence intervals and prediction intervals 
+residuals_srlmodel <- residuals(slrmodel)
+plot(residuals_srlmodel, main="Residuals Plot for SLR", ylab="Residuals")
+abline(h=0, col="red", lwd=2, lty=2)
+qqnorm(residuals_srlmodel)
+qqline(residuals_srlmodel, col="blue2")
+```
+We can see that the residuals indeed destributed alike Gaussian, but there are still some weird behaviors in the QQ plot, and verifies our thought that one predictor logAbsences may not be enough to predict the G3. Hence, we will move forward to the Multiple Linear Regression Model and set up more predictors for our dataset. 
+
+
+# 3 Multiple Linear Model
+Starting from this part, we are going to separate our dataset into 70% of training and 30% of testing. 
+
+```{r, echo=F, warning=F, message=F}
+mathdata <- mathdata %>%
+  mutate(across(c(Study_time, Family_rel, Walc, Health), as.factor))
+```
+
+First of all, we set up a whole model and then we use stepwise selection to crawl the model space, adding or removing variables one at a time until reaching a stoppping point, depending on which is better. Stepwise methods are combinations of forward selection and backward elimination, it can start at anywhere, at each iteration, either a forward or backward step can be taken. And we found the significant predictors depending on their p-values presented below. 
+```{r, echo=F, warning=F, message=F}
+variables <- c("Age", "Study_time", "Family_rel", "Walc", "Health", "G1", "G2", "G3", "logAbsences")
+newmathdata <- mathdata[, variables]
+set.seed(81921)  # for reproducibility
+train_index <- createDataPartition(newmathdata$G3, p = 0.7, list = FALSE)
+train_data <- newmathdata[train_index, ]
+test_data <- newmathdata[-train_index, ]
+fullmodel <- lm(G3 ~ ., data = train_data)
+#stepwisemodel <- stepAIC(fullmodel, direction = "both")
+summary(fullmodel)
+```
+New model :
+$$\text{G3}_i \sim \beta_1 \text{Age}_i + \beta_2 \mathbf{1}\{\text{Family\_rel}_i = 5\} + \beta_3 \text{G1}_i + \beta_4 \text{G2}_i + \beta_5 \log(\text{Absences}_i) + \varepsilon_i$$
+Interesting finding, in the simple linear regression step, we found that intercept was significant and then here, intercept was not significant, which is an surprising finding that deserves further investigation. 
+
+$$\text{G3_tran}_i \sim \beta_1 \text{Age}_i+ \beta_2 \text{G1}_i + \beta_3 \text{G2}_i + \beta_4 \log(\text{Absences}_i) + \varepsilon_i$$
+
+Apply the model to our testing data and see the residuals. 
+```{r, echo=F, warning=F, message=F, fig.width=8, fig.height=4, fig.align='center'}
+# create the indicator variable for Family_rel = 5
+train_data$Family_rel_5 <- ifelse(train_data$Family_rel == 5, 1, 0)
+
+# fit the linear model including the indicator variable
+MLR <- lm(G3 ~ Family_rel_5 + logAbsences + Age + G1 + G2, data = train_data)
+# summary(MLR)
+test_data$Family_rel_5 <- ifelse(test_data$Family_rel == 5, 1, 0)
+mlr_pred <- predict(MLR, newdata = test_data)
+mlr_residuals <- test_data$G3 - mlr_pred
+par(mfrow = c(1,2))
+plot(mlr_residuals, main="Residuals Plot for MLR", ylab="Residuals")
+abline(h=0, col="red", lwd=2, lty=2)
+qqnorm(mlr_residuals)
+qqline(mlr_residuals, col="blue2", lwd=1.5)
+train_data$Family_rel_5 <- NULL
+test_data$Family_rel_5 <- NULL
+```
+
+The more predictors we use, the higher chance we might encounter multi-collinearity within our predictors, and we can see from the ggpairs plot, it has shown that G1, G2, and G3 are highly correlated with each other, as demonstrated by the GGpairs plot. To address collinearity, we are going to employ shrinkage methods such as LASSO and Ridge Regression. Shrinkage techniques build on the principles from the mathematical optimization models of multiple linear regression by introducing a penalizing term to the loss function. These methods are typically used to address collinearity and aid in variable selection. 
+
+
+# 4 Shrinkage Method
+```{r, echo=F, warning=F, message=F}
+x_train <- model.matrix(G3 ~ . , data = train_data)[,-1]
+y_train <- train_data$G3
+x_test <- model.matrix(G3 ~ ., data = test_data)[,-1]
+y_test <- test_data$G3
+
+# cross-validation for Ridge Regression
+ridge_cv <- cv.glmnet(x_train, y_train, alpha = 0)
+ridge_lambda <- ridge_cv$lambda.min
+ridge_model <- glmnet(x_train, y_train, alpha = 0, lambda = ridge_lambda)
+
+# cross-validation for LASSO
+lasso_cv <- cv.glmnet(x_train, y_train, alpha = 1)
+lasso_lambda <- lasso_cv$lambda.min
+lasso_model <- glmnet(x_train, y_train, alpha = 1, lambda = lasso_lambda)
+
+# summary for both LASSO and ridge
+ridge_summary <- summary(ridge_model)
+lasso_summary <- summary(lasso_model)
+
+list(Ridge_Lambda = ridge_lambda, LASSO_Lambda = lasso_lambda)
+ridge_coefs <- as.vector(coef(ridge_model))
+lasso_coefs <- as.vector(coef(lasso_model))
+```
+
+```{r, echo=F, warning=F, message=F}
+terms <- rownames(coef(ridge_model))
+coefficients <- data.frame(
+  Term = terms,
+  Ridge = ridge_coefs,
+  LASSO = lasso_coefs
+)
+kable(coefficients, caption = "Coefficients from Ridge and LASSO Models")
+```
+By using them, we can see that some categorical variables are indeed important. Ridge Regression includes all predictors, shrinking their coefficients towards zero without eliminating them, resulting in smaller coefficients compared to MLR due to regularization. LASSO, on the other hand, performs more strict variable selection by shrinking the coefficients of insignificant predictors to $0$, which is why it includes fewer predictors. Notably, both models include the intercept, which we previously ruled as insignificant in the MLR model. \newline
+Despite these differences, we observe that the coefficients for Age, logAbsences, G1, and G2 are quite close to the MLR models, suggesting that these variables are consistently important predictors of G3. Now, we can apply these models for prediction and test which one provides better prediction accuracy.
+
+```{r, echo=F, warning=F, message=F}
+ridge_pred <- predict(ridge_model, s = ridge_lambda, newx = x_test)
+lasso_pred <- predict(lasso_model, s = lasso_lambda, newx = x_test)
+
+# create a data frame contains predictions from 3 models and the observed responses
+predictions <- data.frame(
+  Observed = y_test,
+  MLR = mlr_pred,
+  Ridge = as.vector(ridge_pred),
+  LASSO = as.vector(lasso_pred)
+)
+```
+
+```{r, echo=F, warning=F, message=F}
+# R^2 for 3 models
+r2 <- function(observed, predicted) {
+  ss_total <- sum((observed - mean(observed))^2)
+  ss_residual <- sum((observed - predicted)^2)
+  r2 <- 1 - (ss_residual / ss_total)
+  return(r2)
+}
+
+# RMSE for 3 models
+rmse <- function(observed, predicted) {
+  rmse <- sqrt(mean((observed - predicted)^2))
+  return(rmse)
+}
+
+# MAE for 3 models
+mae <- function(observed, predicted) {
+  mae <- mean(abs(observed - predicted))
+  return(mae)
+}
+```
+
+```{r, echo=F, warning=F, message=F, fig.align='center'}
+# Compare 3 models
+criteria <- data.frame(
+  Model = c("MLR", "Ridge", "LASSO"),
+  R2 = c(r2(y_test, mlr_pred), r2(y_test, ridge_pred), r2(y_test, lasso_pred)),
+  RMSE = c(rmse(y_test, mlr_pred), rmse(y_test, ridge_pred), rmse(y_test, lasso_pred)),
+  MAE = c(mae(y_test, mlr_pred), mae(y_test, ridge_pred), mae(y_test, lasso_pred))
+)
+kable(criteria, caption = "Accuracy Criteria")
+```
+# 5 Inovation
+
+The methods we chose, the Box-Cox Transformation and the Bootstrap Method, were highly effective in improving our regression model's accuracy  and reliability. 
+
+The data's non-linearity and heteroscedasticity were effectively addressed by the Box-Cox Transformation, which stabilized variance and improved the residuals' normal distribution. This is demonstrated by the Q-Q plot's more precise matching of residuals with the diagonal line and the Residuals vs. Fitted plot's more randomly distributed residuals around zero. 
+
+Additionally, the Bootstrap Method validated the stability and reliability of our model's coefficients by repeatedly resampling the data, which confirmed that the original coefficients were close to the bootstrap means and fell within the narrow bootstrap confidence intervals. The results indicate the great reliability and stability of our estimations, showing the accuracy and not a significant bias in the model's coefficients. 
+
+Overall, these methods provided significant insight into the variables that affect student performance in the final and ensured that our model's predictions were accurate and reliable.
+
+# 6 Practical and Inferential Insights
+
+This data analysis provides valuable insights for improving student outcomes and tailoring support strategies within the education system. By understanding the relationship between absences and grades, we can draw meaningful conclusions and make predictions about student performance.
+
+School Administration and Teachers:
+
+The results help school administrators identify trends and areas of concern, enabling the development of policies and interventions to reduce absenteeism and boost academic achievement. Teachers can adjust instruction strategies, use flexible attendance policies, and provide additional resources to support students, using data-driven insights to target the most impactful factors.
+
+Parents:
+
+Parents gain a clearer understanding of how attendance affects academic performance, allowing them to encourage consistent attendance and address barriers. This knowledge fosters better collaboration with teachers and counselors to support their children’s educational journey.
+
+
+
+
+
+
+
+# 7 Conclusion
+
+In general, we found that these three models have very similar metrics. Before conducting this analysis, we expected LASSO or Ridge to outperform MLR significantly due to their broader consideration of predictors. While all three models perform well, LASSO has a slight advantage in terms of accuracy. Ridge regression provides stability by addressing collinearity, though with a minor reduction in prediction accuracy.
+
+However, the MLR model is still regarded as a suitable model for analysis as it has fewer number of variables indicate less complexity, which would be helpful to prevent overfitting and improve generalization in our model, the only cost is a little prediction accuracy.
+
+While our analysis provides intriguing insights into the relationship between various attributes and students’ performances, the current sample’s limitations warrant caution. Our goal is to predict mathematics per- formance across Portugal, yet our sample includes only about 400 students from 2 schools. In the 2021/22 school year, 963 schools provided upper secondary education to 397,100 students across Portugal (Education Statistics 2021/2022, DGEEC/DSEE). This limited sample size may not fully capture the diverse factors influencing student performance across different regions and demographics.
+
+A more representative sample is crucial for enhancing the robustness and reliability of our models and predictions. Including a larger and more diverse group of students would ensure our analysis accounts for varying socio-economic backgrounds, educational resources, and regional differences. Moreover, a broader sample would enable us to identify new significant predictors and filter down existing ones more accurately.
+
+
+# Thoughts
+
+As a concluding thought, our group found this topic particularly compelling. In today’s competitive educa- tional landscape, grades have become increasingly important to many people. Parents often face challenges in supporting their children’s education while striving to provide the best possible guidance. This study is especially meaningful as it can serve as an educational guide for new parents who are deeply invested in their children’s academic success. By understanding the factors that influence student performance, they can better support and encourage their children’s educational journeys.
+Our work with regression techniques has inspired us to apply them to other important datasets. Beyond educational data, we could analyze world poverty and famine rates to uncover insights that inform policy decisions. Understanding the factors behind these issues will enhance our skills and help us make a meaningful impact. By extending our use of regression techniques, we aim to contribute positively to addressing global challenges.
+
+
+
+
+
+
+
+
