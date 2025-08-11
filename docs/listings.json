@@ -1,12 +1,7 @@
 [
   {
     "listing": "/project.html",
-    "items": [
-      "/project/hw2/hw2_questions.html",
-      "/project/hw3/hw3_questions.html",
-      "/project/hw4/hw4_questions.html",
-      "/project/hw1/hw1_questions.html"
-    ]
+    "items": []
   },
   {
     "listing": "/project/project.html",
@@ -17,5 +12,9 @@
       "/project/hw2/hw2_questions.html",
       "/project/hw1/hw1_questions.html"
     ]
+  },
+  {
+    "listing": "/Project.html",
+    "items": []
   }
 ]

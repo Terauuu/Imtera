@@ -1,13 +1,14 @@
 ---
-title: "Ethan An"
-image: "EthanAn.jpg"
+title: "Linglu Li"
+image: "Imtera.jpg"
+
 about:
     template: jolla
     links:
        - icon: envelope
-         href: mailto:z5an@ucsd.edu
+         href: mailto:terali825@gmail.com
        - icon: linkedin
-         href: https://www.linkedin.com/in/ethan-an-04014828b/
+         href: https://www.linkedin.com/in/linglu-li-813115203/
 
 ---
 
