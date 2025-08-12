@@ -1,6 +1,6 @@
 ---
 title: "Project Summary"
-author: "Amy Ji(6009476), Tera Li(7545403), Brandon Su(5807961)"
+author: "Linglu Li, Amy Ji, Brandon Su"
 date: "2024-06-11"
 format: html
 categories:: [project]
